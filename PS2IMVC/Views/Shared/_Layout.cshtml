@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        html {
+            height: 100%;
+            position: relative;
+        }
+/*        td {
+            padding: 0;
+            margin: 0;
+            width: 10%;
+            height: 100%;
+            position: absolute;
+        }
+        tr {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 10%;
+            position: absolute;
+        }*/
+
+    </style>
+</head>
+<body style="width: 100%; height: 100%; padding: 0; margin: 0;" onload="Refresh()">
+    <img src="~/Static/Boiler.png" style="height: 100%; width: 50%; margin-left: 25%; margin-right: 25%; position: absolute;" />
+    <table style="width: 50%; margin-left: 25%; margin-right: 25%; height: 100%; position: relative;"> 
+    @for(int i = 0; i < 100; i++)
+    {
+        <tr>
+            @for (int j = 0; j < 10; j++)
+            {
+                if (j >= 3 && j <= 6 && i >= 23 && i <= 79)
+                {
+                    if (j == 3)
+                    {
+                        <td data-i="@i" data-j="@j" style="width: 4%;"></td>
+                    }
+                    else if (j == 6)
+                    {
+                        <td data-i="@i" data-j="@j" style="width: 0.5%;"></td>
+                    }
+                    else
+                    {
+                        <td data-i="@i" data-j="@j"></td>
+                    }
+                }
+                else
+                {
+                    if (j == 3)
+                    {
+                        <td style="width: 4%;"></td>
+                    }
+                    else if (j == 6)
+                    {
+                        <td style="width: 0.5%;"></td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                }
+
+            }
+        </tr>
+    }
+
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        var i = 79;
+        function Refresh() {
+            $('td[data-i=' + i + '][data-j=' + 6 + '], td[data-i=' + i + '][data-j=' + 5 + '], td[data-i=' + i + '][data-j=' + 4 + '], td[data-i=' + i + '][data-j=' + 3 + ']').css('background-color', 'rgba(0, 0, 0, 0.5)');
+            i--;
+            if(i >= 23)
+                setTimeout(Refresh, 100);
+        }
+    </script>
+
+</body>
+</html>
