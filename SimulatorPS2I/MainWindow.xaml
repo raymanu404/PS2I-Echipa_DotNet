@@ -1,0 +1,31 @@
+﻿<Window x:Class="SimulatorPS2I.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimulatorPS2I"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="345*" />
+            <RowDefinition Height="578*"/>
+            <RowDefinition Height="8*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="956" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <local:MyControl Margin="-5,0,153.6,24" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.RowSpan="2" >
+            <local:MyControl.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.225"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </local:MyControl.RenderTransform>
+
+        </local:MyControl>
+    </Grid>
+</Window>
