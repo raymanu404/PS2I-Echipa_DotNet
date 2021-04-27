@@ -27,22 +27,23 @@ namespace SimulatorPS2I
         {
             InitializeComponent();
             _vmb = new ViewModelBoiler();
+            this.DataContext = _vmb;
 
         }
 
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
-
+            _vmb.Init();
         }
 
         private void Button_Click_S1(object sender, RoutedEventArgs e)
         {
-
+            _vmb.ForceNextState(ProcessState.Filling); //umplere
         }
 
         private void Button_Click_S2(object sender, RoutedEventArgs e)
         {
-
+            _vmb.ForceNextState(ProcessState.Emptying); //golire
         }
 
         private void Button_Click_S3(object sender, RoutedEventArgs e)
@@ -51,7 +52,7 @@ namespace SimulatorPS2I
         }
         private void Button_Click_S4(object sender, RoutedEventArgs e)
         {
-
+            _vmb.ForceNextState(ProcessState.On); //stop sau mentinere
         }
     }
 }

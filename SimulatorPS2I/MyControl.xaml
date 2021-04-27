@@ -73,11 +73,11 @@
 
             <Border CornerRadius="10" Grid.Row="5" Grid.Column="19" Grid.RowSpan="5" Background="White" Margin="0.4,0.6,0,0.6" />
 
-            <Border CornerRadius="100" Grid.Row="5" Grid.Column="19" Background="Yellow" Margin="9.6,10.2,10.2,9.6" Visibility="{Binding IsRedForCarsVisible}" />
-            <Border CornerRadius="100" Grid.Row="6" Grid.Column="19" Background="Yellow" Margin="9.6,10.4,10.2,10.4" Visibility="{Binding IsYellowForCarsVisible}"/>
-            <Border CornerRadius="100" Grid.Row="7" Grid.Column="19" Background="Yellow" Margin="9.6,9.6,10.2,10.2" Visibility="{Binding IsGreenForCarsVisible}"/>
-            <Border CornerRadius="100" Grid.Row="8" Grid.Column="19" Background="Yellow" Margin="9.6,10.4,10.2,10.4" Visibility="{Binding IsYellowForCarsVisible}"/>
-            <Border CornerRadius="100" Grid.Row="9" Grid.Column="19" Background="Yellow" Margin="9.6,9.6,10.2,10.2" Visibility="{Binding IsGreenForCarsVisible}"/>
+            <Border CornerRadius="100" Grid.Row="5" Grid.Column="19" Background="Yellow" Margin="9.6,10.2,10.2,9.6" Visibility="{Binding IsB5Visible}" />
+            <Border CornerRadius="100" Grid.Row="6" Grid.Column="19" Background="Yellow" Margin="9.6,10.4,10.2,10.4" Visibility="{Binding IsB4Visible}"/>
+            <Border CornerRadius="100" Grid.Row="7" Grid.Column="19" Background="Yellow" Margin="9.6,9.6,10.2,10.2" Visibility="{Binding IsB3Visible}"/>
+            <Border CornerRadius="100" Grid.Row="8" Grid.Column="19" Background="Yellow" Margin="9.6,10.4,10.2,10.4" Visibility="{Binding IsB2Visible}"/>
+            <Border CornerRadius="100" Grid.Row="9" Grid.Column="19" Background="Yellow" Margin="9.6,9.6,10.2,10.2" Visibility="{Binding IsB1Visible}"/>
 
             <Button Grid.Column="20" Background="DimGray" Margin="10,50,0,0" Click="Button_Click_Start" Grid.ColumnSpan="5" Grid.RowSpan="2">
                 <TextBlock Text="Start Simulator" Foreground="White" FontSize="24"></TextBlock>
@@ -101,9 +101,11 @@
 
             </ScrollBar>
 
-            <Border CornerRadius="10" Grid.Row="5" Grid.Column="15" Grid.RowSpan="5" Background="Aqua" Margin="0.4,0.6,0,0.6" />
-            <Border CornerRadius="10" Grid.Row="5" Grid.Column="16" Grid.RowSpan="5" Background="Aqua" Margin="0.4,0.6,0,0.6" />
-            <Border CornerRadius="10" Grid.Row="5" Grid.Column="17" Grid.RowSpan="5" Background="Aqua" Margin="0.4,0.6,0,0.6" />
+            <Border  Grid.Row="5" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,0.2,0.2,0.4" Visibility="{Binding IsB5Visible }" />
+            <Border  Grid.Row="5" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,49.2,0.2,0" Visibility="{Binding IsB4Visible }" Grid.RowSpan="2"/>
+            <Border  Grid.Row="6" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,46.6,0.2,48" Visibility="{Binding IsB3Visible }" Grid.RowSpan="3" />
+            <Border  Grid.Row="8" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,0.4,0.2,0" Visibility="{Binding IsB2Visible }"/>
+            <Border  Grid.Row="9" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,0,0.2,0.4" Visibility="{Binding IsB1Visible }"/>
 
         </Grid>
     </Grid>
