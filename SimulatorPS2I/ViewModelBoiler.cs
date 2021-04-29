@@ -20,6 +20,8 @@ namespace SimulatorPS2I
         Off,
         Filling,
         Emptying,
+        BlinkOn,
+        BlinkOff,
         On
     }
     class ViewModelBoiler : INotifyPropertyChanged
@@ -31,6 +33,7 @@ namespace SimulatorPS2I
         private bool _setNextState = false;
         private bool _isSendingData = false;
         private BackgroundWorker _worker = new BackgroundWorker();
+        public float capacitate;
 
         public void Init()
         {
@@ -39,6 +42,7 @@ namespace SimulatorPS2I
                 //_sender = new Comm.Sender("127.0.0.1", 3000);
             }
             current_level = 0;
+            capacitate = 0;
             _timer.Elapsed += _timer_Elapsed;
             _worker.DoWork += _worker_DoWork;
             _worker.RunWorkerAsync();
@@ -81,9 +85,6 @@ namespace SimulatorPS2I
 
         private void _worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            // idea de baza a simulatorului este urmatoarea: backgroundworker-ul evalueza tot la 100 de milisecunde starea curenta a procesului 
-            // si seteaza in viewmodel variabilele care actualizeaza UI-ul dupa care utilizand RaiseTimerEvent(NextProcessState, 2000) determina o tranzitie de stare peste un
-            // interval de timp specificat de al doilea paramteru al acestei metode
 
             while (true)
             {
@@ -98,258 +99,248 @@ namespace SimulatorPS2I
             {
                 case ProcessState.Off:
 
-                    IsB5 = false;
-                    IsB4 = false;
-                    IsB3 = false;
-                    IsB2 = false;
-                    IsB1 = false;
+                    IsB5 = false; IsLevel5 = false;
+                    IsB4 = false; IsLevel4 = false;
+                    IsB3 = false; IsLevel3 = false;
+                    IsB2 = false; IsLevel2 = false;
+                    IsB1 = false; IsLevel1 = false;
                     current_level = 0;
                     RaiseTimerEvent(ProcessState.Off, 2000);
                     break;
 
                 case ProcessState.On:
-                    IsB5 = true;
-                    IsB4 = true;
-                    IsB3 = true;
-                    IsB2 = true;
-                    IsB1 = true;
+                    IsB5 = true; IsLevel5 = true;
+                    IsB4 = true; IsLevel4 = true;
+                    IsB3 = true; IsLevel3 = true;
+                    IsB2 = true; IsLevel2 = true;
+                    IsB1 = true; IsLevel1 = true;
 
                     RaiseTimerEvent(ProcessState.On, 2000);
                     break;
 
-                case ProcessState.Filling:
-                    if (current_level == 0)
-                    {
-                        current_level++;
-                    }
-
+                case ProcessState.Filling:                  
                      switch (current_level) {
+                        case 0:
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = false; IsLevel3 = false;
+                            IsB2 = false; IsLevel2 = false;
+                            IsB1 = false; IsLevel1 = false;
+                            current_level++;
+                            System.Threading.Thread.Sleep(2000);
+                            break;
                         case 1:
-                            IsB5 = false;
-                            IsB4 = false;
-                            IsB3 = false;
-                            IsB2 = false;
-                            IsB1 = true;
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = false; IsLevel3 = false;
+                            IsB2 = false; IsLevel2 = false;
+                            IsB1 = true; IsLevel1= true;
                             current_level++;
                             System.Threading.Thread.Sleep(1000);
                             break;
                         case 2:
-                            IsB5 = false;
-                            IsB4 = false;
-                            IsB3 = false;
-                            IsB2 = true;
-                            IsB1 = true;
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = false; IsLevel3 = false;
+                            IsB2 = true;  IsLevel2 = true;
+                            IsB1 = true;  IsLevel1 = true;
                             current_level++;
                             System.Threading.Thread.Sleep(1000);
                             break;
                         case 3:
-                            IsB5 = false;
-                            IsB4 = false;
-                            IsB3 = true;
-                            IsB2 = true;
-                            IsB1 = true;
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = true; IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
                             current_level++;
                             System.Threading.Thread.Sleep(1000);
                             break;
                         case 4:
-                            IsB5 = false;
-                            IsB4 = true;
-                            IsB3 = true;
-                            IsB2 = true;
-                            IsB1 = true;
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = true; IsLevel4 = true;
+                            IsB3 = true; IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
                             current_level++;
                             System.Threading.Thread.Sleep(1000);
                             break;
                         case 5:
-                            IsB5 = true;
-                            IsB4 = true;
-                            IsB3 = true;
-                            IsB2 = true;
-                            IsB1 = true;
+                            IsB5 = true; IsLevel5 = true;
+                            IsB4 = true; IsLevel4 = true;
+                            IsB3 = true; IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
                             System.Threading.Thread.Sleep(1000);
                             break;
                     
                      }
-
-
-                    if (current_level == 5)
-                    {
-                        RaiseTimerEvent(ProcessState.On, 1000);
-                    }
-
-                    Console.WriteLine("current level : " + current_level);
+                     if ( current_level == 5)
+                     {
+                        RaiseTimerEvent(ProcessState.BlinkOn, 1000);
+                     }
+                   
                     RaiseTimerEvent(ProcessState.Filling, 1000);
                     break;              
                 case ProcessState.Emptying:
 
-
                     switch (current_level)
                     {
                         case 5:
-                            IsB5 = true;
-                            IsB4 = true;
-                            IsB3 = true;
-                            IsB2 = true;
-                            IsB1 = true;
+                            IsB5 = true; IsLevel5 = true;
+                            IsB4 = true; IsLevel4 = true;
+                            IsB3 = true; IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
                             current_level--;
                             System.Threading.Thread.Sleep(1000);
                             break;
                         case 4:
-                            IsB5 = false;
-                            IsB4 = true;
-                            IsB3 = true;
-                            IsB2 = true;
-                            IsB1 = true;
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = true; IsLevel4 = true;
+                            IsB3 = true; IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1= true;
                             current_level--;
                             System.Threading.Thread.Sleep(1000);
                             break;
                         case 3:
-                            IsB5 = false;
-                            IsB4 = false;
-                            IsB3 = true;
-                            IsB2 = true;
-                            IsB1 = true;
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = true;  IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
                             current_level--;
                             System.Threading.Thread.Sleep(1000);
                             break;
                         case 2:
-                            IsB5 = false;
-                            IsB4 = false;
-                            IsB3 = false;
-                            IsB2 = true;
-                            IsB1 = true;
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = false; IsLevel3 = false;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
                             current_level--;
                             System.Threading.Thread.Sleep(1000);
                             break;
                         case 1:
-                            IsB5 = false;
-                            IsB4 = false;
-                            IsB3 = false;
-                            IsB2 = false;
-                            IsB1 = true;
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = false; IsLevel3 = false;
+                            IsB2 = false; IsLevel2 = false;
+                            IsB1 = true; IsLevel1 = true;
                             current_level--;
                             System.Threading.Thread.Sleep(1000);
                             break;
                         case 0:
-                            IsB5 = false;
-                            IsB4 = false;
-                            IsB3 = false;
-                            IsB2 = false;
-                            IsB1 = false;
-                            System.Threading.Thread.Sleep(1000);
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = false; IsLevel3 = false;
+                            IsB2 = false; IsLevel2 = false;
+                            IsB1 = false; IsLevel1 = false;
+                            System.Threading.Thread.Sleep(2000);
                             break;
                     }
                     if (current_level == 0)
                     {
                         RaiseTimerEvent(ProcessState.Off, 1000);
                     }
-                    Console.WriteLine("current_level  : " + current_level);
+                   
                     RaiseTimerEvent(ProcessState.Emptying, 1000);
+                    break;
+                case ProcessState.BlinkOn:
+                    switch (current_level)
+                    {
+                        case 5:
+                            IsB5 = true; IsLevel5 = true;
+                            IsB4 = true; IsLevel4 = true;
+                            IsB3 = true; IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
+                            break;
+                        case 4:
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = true; IsLevel4 = true;
+                            IsB3 = true; IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
+                            break;
+                        case 3:
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = true; IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
+                            break;
+                        case 2:
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = false; IsLevel3= false;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
+                            break;
+                        case 1:
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = false; IsLevel3 = false;
+                            IsB2 = false; IsLevel2 = false;
+                            IsB1 = true; IsLevel1 = true;
+                            break;
+                    }
+
+                    _setNextState = false;
+                    _timer.Stop();
+                    RaiseTimerEvent(ProcessState.BlinkOff, 1000);
+                    break;
+
+                case ProcessState.BlinkOff:
+                    switch (current_level)
+                    {
+                        case 5:
+                            IsB5 = false; IsLevel5 = true;
+                            IsB4 = true; IsLevel4 = true;
+                            IsB3 = true; IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
+                            break;
+                        case 4:
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = true;
+                            IsB3 = true; IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
+                            break;
+                        case 3:
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = false; IsLevel3 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
+                            break;
+                        case 2:
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = false; IsLevel3 = false;
+                            IsB2 = false; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
+                            break;
+                        case 1:
+                            IsB5 = false; IsLevel5 = false;
+                            IsB4 = false; IsLevel4 = false;
+                            IsB3 = false; IsLevel3 = false;
+                            IsB2 = false; IsLevel2 = false;
+                            IsB1 = false; IsLevel1 = true;
+                            break;
+                    }
+
+                    _setNextState = false;
+                    _timer.Stop();
+                    RaiseTimerEvent(ProcessState.BlinkOn, 1000);
                     break;
 
             }
 
         }
-
-
-        private void nextLevel(int current_level,bool flag)
-        {
-            
-
-
-            //switch (current_level)
-            //{
-            //    case 0:
-            //        IsB5 = false;
-            //        IsB4 = false;
-            //        IsB3 = false;
-            //        IsB2 = false;
-            //        IsB1 = false;
-            //        RaiseTimerEvent(ProcessState.Off, 1000);
-            //        break;
-            //    case 1:
-            //        IsB5 = false;
-            //        IsB4 = false;
-            //        IsB3 = false;
-            //        IsB2 = false;
-            //        IsB1 = true;
-
-            //        if (flag)
-            //        {
-            //            current_level++;
-            //        }
-            //        else
-            //            current_level--;
-            //        System.Threading.Thread.Sleep(1000);
-            //        break;
-            //    case 2:
-            //        IsB5 = false;
-            //        IsB4 = false;
-            //        IsB3 = false;
-            //        IsB2 = true;
-            //        IsB1 = true;
-
-            //        if (flag)
-            //        {
-            //            current_level++;
-            //        }
-            //        else
-            //            current_level--;
-            //        System.Threading.Thread.Sleep(1000);
-            //        break;
-            //    case 3:
-            //        IsB5 = false;
-            //        IsB4 = false;
-            //        IsB3 = true;
-            //        IsB2 = true;
-            //        IsB1 = true;
-
-            //        if (flag)
-            //        {
-            //            current_level++;
-            //        }
-            //        else
-            //            current_level--;
-            //        System.Threading.Thread.Sleep(1000);
-            //        break;
-            //    case 4:
-            //        IsB5 = false;
-            //        IsB4 = true;
-            //        IsB3 = true;
-            //        IsB2 = true;
-            //        IsB1 = true;
-
-            //        if (flag)
-            //        {
-            //            current_level++;
-            //        }
-            //        else
-            //            current_level--;
-            //        System.Threading.Thread.Sleep(1000);
-            //        break;
-            //    case 5:
-            //        IsB5 = true;
-            //        IsB4 = true;
-            //        IsB3 = true;
-            //        IsB2 = true;
-            //        IsB1 = true;
-
-            //        if (flag)
-            //        {
-            //            current_level++;
-            //        }
-            //        else
-            //            current_level--;
-            //        System.Threading.Thread.Sleep(1000);
-            //        break;
-
-            //}
-           
-            
-           
-           
-
-        }
+     
         private void RaiseTimerEvent(ProcessState NextStateOfTheProcess, int TimeInterval)
         {
             if (!_setNextState)
@@ -368,7 +359,7 @@ namespace SimulatorPS2I
 
 
         #region UI_updates
-        //pentru senzorul B5
+        //pentru senzorul B5     
         private bool _isB5;
         public bool IsB5
         {
@@ -524,7 +515,160 @@ namespace SimulatorPS2I
                     return System.Windows.Visibility.Hidden;
                 }
             }
-        } 
+        }
+
+        //pentru level 1
+        private bool _isLevel1;
+        public bool IsLevel1
+        {
+            get
+            {
+                return _isLevel1;
+            }
+            set
+            {
+                _isLevel1 = value;
+                OnPropertyChanged(nameof(IsLevel1Visible));
+
+            }
+        }
+
+        public System.Windows.Visibility IsLevel1Visible
+        {
+            get
+            {
+                if (_isLevel1)
+                {
+                    return System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    return System.Windows.Visibility.Hidden;
+                }
+            }
+        }
+
+        //pentru level 2
+        private bool _isLevel2;
+        public bool IsLevel2
+        {
+            get
+            {
+                return _isLevel2;
+            }
+            set
+            {
+                _isLevel2 = value;
+                OnPropertyChanged(nameof(IsLevel2Visible));
+
+            }
+        }
+
+        public System.Windows.Visibility IsLevel2Visible
+        {
+            get
+            {
+                if (_isLevel2)
+                {
+                    return System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    return System.Windows.Visibility.Hidden;
+                }
+            }
+        }
+        //pentru level 3
+        private bool _isLevel3;
+        public bool IsLevel3
+        {
+            get
+            {
+                return _isLevel3;
+            }
+            set
+            {
+                _isLevel3 = value;
+                OnPropertyChanged(nameof(IsLevel3Visible));
+
+            }
+        }
+
+        public System.Windows.Visibility IsLevel3Visible
+        {
+            get
+            {
+                if (_isLevel3)
+                {
+                    return System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    return System.Windows.Visibility.Hidden;
+                }
+            }
+        }
+        //pentru level 4
+        private bool _isLevel4;
+        public bool IsLevel4
+        {
+            get
+            {
+                return _isLevel4;
+            }
+            set
+            {
+                _isLevel4 = value;
+                OnPropertyChanged(nameof(IsLevel4Visible));
+
+            }
+        }
+
+        public System.Windows.Visibility IsLevel4Visible
+        {
+            get
+            {
+                if (_isLevel4)
+                {
+                    return System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    return System.Windows.Visibility.Hidden;
+                }
+            }
+        }
+        //pentru level 5
+        private bool _isLevel5;
+        public bool IsLevel5
+        {
+            get
+            {
+                return _isLevel5;
+            }
+            set
+            {
+                _isLevel5 = value;
+                OnPropertyChanged(nameof(IsLevel5Visible));
+
+            }
+        }
+
+        public System.Windows.Visibility IsLevel5Visible
+        {
+            get
+            {
+                if (_isLevel5)
+                {
+                    return System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    return System.Windows.Visibility.Hidden;
+                }
+            }
+        }
+
         #endregion
     }
 
