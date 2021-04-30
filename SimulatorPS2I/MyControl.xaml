@@ -127,23 +127,43 @@
                 <TextBlock Text="Start Simulator" Foreground="White" FontSize="24"></TextBlock>
             </Button>
 
-            <Button Grid.Column="22"  Background="LightGreen" Click="Button_Click_S1" Grid.ColumnSpan="4" Margin="50.2,0.4,30.4,4.2" Grid.Row="3">
-                <TextBlock  Text="S1" Foreground="Black" FontSize="24" />
+            <Button Name="InitCondButton" Grid.Column="22"  Background="LightGreen" Click="Button_Click_S1" Grid.ColumnSpan="4" Margin="50.2,0.4,30.4,4.2" Grid.Row="3">
+                <TextBlock  Text="Conditii intiale" Foreground="Black" FontSize="16" />
             </Button>
-            <Button Grid.Column="22" Background="LightGreen" Click="Button_Click_S2" Grid.ColumnSpan="4" Margin="50.2,9.8,30.4,3.8" Grid.Row="4">
+            <Button Name="FillButton" Grid.Column="22" Background="LightGreen" Click="Button_Click_S2" Grid.ColumnSpan="4" Margin="50.2,9.8,30.4,3.8" Grid.Row="4">
                 <TextBlock  Text="Stare umplere" Foreground="Black" FontSize="16" />
             </Button>
-            <Button Grid.Column="22" Background="LightGreen" Click="Button_Click_S3" Grid.ColumnSpan="4" Margin="50.2,6.2,30.4,9.4" Grid.Row="5">
+            <Button Name="EmptyButton" Grid.Column="22" Background="LightGreen" Click="Button_Click_S3" Grid.ColumnSpan="4" Margin="50.2,6.2,30.4,9.4" Grid.Row="5">
                 <TextBlock  Text="Stare golire" Foreground="Black" FontSize="16" />
             </Button>
 
-            <Button Grid.Column="22" Background="LightGreen" Click="Button_Click_S4" Margin="50.2,14.6,30.4,0" Grid.Row="6" Grid.ColumnSpan="4">
+            <Button Name="MantainButton" Grid.Column="22" Background="LightGreen" Click="Button_Click_S4" Margin="50.2,14.6,30.4,0" Grid.Row="6" Grid.ColumnSpan="4">
                 <TextBlock  Text="Stare mentinere" Foreground="Black" FontSize="16" RenderTransformOrigin="2.25,1.912" Height="28" Width="111" />
             </Button>
-            <ScrollBar Grid.Column="22" Grid.Row="9" Grid.RowSpan="3" Margin="26.2,50,0,0.2" Width="27" Grid.ColumnSpan="2" HorizontalAlignment="Left" />
-            <ScrollBar Grid.Column="23" Grid.Row="9" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="35.8,50,42,0.2" Width="Auto" >
 
+            <ScrollBar Name="P1Scrollbar"  Background="LightGreen" Grid.Column="22" Foreground="Aqua" Grid.Row="9" Grid.RowSpan="3" Margin="38.2,12,0,40.2" Width="23" Grid.ColumnSpan="2" HorizontalAlignment="Left" Value="{Binding P1Value}" RenderTransformOrigin="0.5,0.5" ValueChanged="P1Scrollbar_ValueChanged">
+                <ScrollBar.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-89.427"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ScrollBar.RenderTransform>
             </ScrollBar>
+            <ScrollBar Name="P2Scrollbar"  Background="LightGreen" Grid.Column="22" Grid.Row="10" Grid.RowSpan="3" Margin="41.2,35.6,36.6,14.6" Width="Auto" Value="{Binding P2Value}" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" ValueChanged="P2Scrollbar_ValueChanged" >
+                <ScrollBar.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-89.619"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ScrollBar.RenderTransform>
+            </ScrollBar>
+            <Label Content="Potentiometru pentru umplere" Grid.Column="22" HorizontalAlignment="Left" Margin="0.2,22,0,0" Grid.Row="9" VerticalAlignment="Top" Grid.ColumnSpan="4" Width="171"/>
+            <Label Content="Potentiometru pentru golire" Grid.Column="22" HorizontalAlignment="Left" Margin="2.2,0.2,0,0" Grid.Row="11" VerticalAlignment="Top" Grid.ColumnSpan="4" Width="169"/>
+
 
             <Border  Grid.Row="5" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,0.2,0.2,0.4" Visibility="{Binding IsLevel5Visible }" />
             <Border  Grid.Row="5" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,49.2,0.2,0" Visibility="{Binding IsLevel4Visible}" Grid.RowSpan="2"/>
@@ -151,6 +171,9 @@
             <Border  Grid.Row="8" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,0.4,0.2,0" Visibility="{Binding IsLevel2Visible }"/>
             <Border  Grid.Row="9" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,0,0.2,0.4" Visibility="{Binding IsLevel1Visible }"/>
             <Border  CornerRadius="0" Grid.Row="9" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,22,0.2,22.8" Visibility="{Binding IsLevel1Visible }" Grid.RowSpan="2"/>
+            <Label Name="InitCondLabel" Foreground="Red" Grid.Column="20" HorizontalAlignment="Left" Margin="22,10,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="16" FontWeight="SemiBold" Grid.ColumnSpan="6" Height="35" Width="250"/>
+
+
 
 
         </Grid>

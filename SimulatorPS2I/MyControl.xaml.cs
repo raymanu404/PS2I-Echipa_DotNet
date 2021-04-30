@@ -33,33 +33,68 @@ namespace SimulatorPS2I
         public int prag5;
         public bool[] isEnabledButton = new bool[9];
 
+        public double valueOfP1;
+        public double valueOfP2;
+
         public MyControl()
         {
             InitializeComponent();
             _vmb = new ViewModelBoiler();
             this.DataContext = _vmb;
+          
+            this.SubmitButton.IsEnabled = false;
+            this.P1Scrollbar.IsEnabled = false;
+            this.P2Scrollbar.IsEnabled = false;
 
+            this.InitCondButton.IsEnabled = false;
+            this.FillButton.IsEnabled = false;
+            this.EmptyButton.IsEnabled = false;
+            this.MantainButton.IsEnabled = false;
+                                
         }
 
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
+         
             _vmb.Init();
+            this.InitCondButton.IsEnabled = true;
+
         }
 
         private void Button_Click_S1(object sender, RoutedEventArgs e)
         {
-            _vmb.ForceNextState(ProcessState.Off);
+            
+            if (this.SubmitButton.IsEnabled)
+            {
+
+                //aici trimitem conditiile initiale catre ViewModel
+                this.InitCondLabel.Content = "";
+                _vmb.GetConditions();
+                this.FillButton.IsEnabled = true;
+                this.EmptyButton.IsEnabled = true;
+                this.MantainButton.IsEnabled = true;
+            }
+            else
+            {
+                this.InitCondLabel.Content = "Introduceti Datele initiale";
+            }
+           
         }
 
         private void Button_Click_S2(object sender, RoutedEventArgs e)
         {
-            _vmb.ForceNextState(ProcessState.Filling); //umplere
-            
+            _vmb.ForceNextState(ProcessState.Filling); //umplere 
+
+            //trebuie pasat valoarea din P1 dar si din P2 , iar umplerea/ golirea sa se faca in functie de p1 si p2
+            this.P1Scrollbar.IsEnabled = true;
+            this.P2Scrollbar.IsEnabled = false;
         }
 
         private void Button_Click_S3(object sender, RoutedEventArgs e)
         {
             _vmb.ForceNextState(ProcessState.Emptying); //golire
+            this.P1Scrollbar.IsEnabled = false;
+            this.P2Scrollbar.IsEnabled = true;
         }
         private void Button_Click_S4(object sender, RoutedEventArgs e)
         {
@@ -79,16 +114,8 @@ namespace SimulatorPS2I
             this.prag3 = Int32.Parse(pragB3.Text);
             this.prag4 = Int32.Parse(pragB4.Text);
             this.prag5 = Int32.Parse(pragB5.Text);
-
-            //Console.WriteLine("Capacitate: "+this.cap.ToString());
-            //Console.WriteLine("debMaxP1: " + this.debMaxP1.ToString());
-            //Console.WriteLine("debMaxP2: " + this.debMaxP2.ToString());
-            //Console.WriteLine("nivCurent: " + this.nivCurent.ToString());
-            //Console.WriteLine("prag1: " + this.prag1.ToString());
-            //Console.WriteLine("prag2: " + this.prag2.ToString());
-            //Console.WriteLine("prag3: " + this.prag3.ToString());
-            //Console.WriteLine("prag4: " + this.prag4.ToString());
-            //Console.WriteLine("prag5: " + this.prag5.ToString());
+         
+                     
         }
 
         #region ValidareFormular
@@ -320,7 +347,19 @@ namespace SimulatorPS2I
             if (count == v.Length)
                 return true;
             return false;
-        } 
+        }
         #endregion
+       
+        private void P1Scrollbar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            valueOfP1 = _vmb.P1Value * 100;
+            Console.WriteLine(valueOfP1);
+        }
+
+        private void P2Scrollbar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            valueOfP2 = _vmb.P2Value * 100;
+            Console.WriteLine(valueOfP2);
+        }
     }
 }

@@ -41,13 +41,19 @@ namespace SimulatorPS2I
             {
                 //_sender = new Comm.Sender("127.0.0.1", 3000);
             }
+            
             current_level = 0;
             capacitate = 0;
             _timer.Elapsed += _timer_Elapsed;
             _worker.DoWork += _worker_DoWork;
             _worker.RunWorkerAsync();
+            
         }
 
+        public void GetConditions()
+        {
+
+        }
         public void SendData()
         {
             if (_isSendingData)
@@ -56,13 +62,14 @@ namespace SimulatorPS2I
             }
         }
 
+        #region Simulator
         void OnPropertyChanged(string prop)
         {
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-           
+
         private ProcessState _currentStateOfTheProcess = ProcessState.Off;
         public ProcessState CurrentStateOfTheProcess
         {
@@ -118,8 +125,9 @@ namespace SimulatorPS2I
                     RaiseTimerEvent(ProcessState.On, 2000);
                     break;
 
-                case ProcessState.Filling:                  
-                     switch (current_level) {
+                case ProcessState.Filling:
+                    switch (current_level)
+                    {
                         case 0:
                             IsB5 = false; IsLevel5 = false;
                             IsB4 = false; IsLevel4 = false;
@@ -134,7 +142,7 @@ namespace SimulatorPS2I
                             IsB4 = false; IsLevel4 = false;
                             IsB3 = false; IsLevel3 = false;
                             IsB2 = false; IsLevel2 = false;
-                            IsB1 = true; IsLevel1= true;
+                            IsB1 = true; IsLevel1 = true;
                             current_level++;
                             System.Threading.Thread.Sleep(1000);
                             break;
@@ -142,8 +150,8 @@ namespace SimulatorPS2I
                             IsB5 = false; IsLevel5 = false;
                             IsB4 = false; IsLevel4 = false;
                             IsB3 = false; IsLevel3 = false;
-                            IsB2 = true;  IsLevel2 = true;
-                            IsB1 = true;  IsLevel1 = true;
+                            IsB2 = true; IsLevel2 = true;
+                            IsB1 = true; IsLevel1 = true;
                             current_level++;
                             System.Threading.Thread.Sleep(1000);
                             break;
@@ -173,15 +181,15 @@ namespace SimulatorPS2I
                             IsB1 = true; IsLevel1 = true;
                             System.Threading.Thread.Sleep(1000);
                             break;
-                    
-                     }
-                     if ( current_level == 5)
-                     {
+
+                    }
+                    if (current_level == 5)
+                    {
                         RaiseTimerEvent(ProcessState.BlinkOn, 1000);
-                     }
-                   
+                    }
+
                     RaiseTimerEvent(ProcessState.Filling, 1000);
-                    break;              
+                    break;
                 case ProcessState.Emptying:
 
                     switch (current_level)
@@ -200,14 +208,14 @@ namespace SimulatorPS2I
                             IsB4 = true; IsLevel4 = true;
                             IsB3 = true; IsLevel3 = true;
                             IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1= true;
+                            IsB1 = true; IsLevel1 = true;
                             current_level--;
                             System.Threading.Thread.Sleep(1000);
                             break;
                         case 3:
                             IsB5 = false; IsLevel5 = false;
                             IsB4 = false; IsLevel4 = false;
-                            IsB3 = true;  IsLevel3 = true;
+                            IsB3 = true; IsLevel3 = true;
                             IsB2 = true; IsLevel2 = true;
                             IsB1 = true; IsLevel1 = true;
                             current_level--;
@@ -244,7 +252,7 @@ namespace SimulatorPS2I
                     {
                         RaiseTimerEvent(ProcessState.Off, 1000);
                     }
-                   
+
                     RaiseTimerEvent(ProcessState.Emptying, 1000);
                     break;
                 case ProcessState.BlinkOn:
@@ -274,7 +282,7 @@ namespace SimulatorPS2I
                         case 2:
                             IsB5 = false; IsLevel5 = false;
                             IsB4 = false; IsLevel4 = false;
-                            IsB3 = false; IsLevel3= false;
+                            IsB3 = false; IsLevel3 = false;
                             IsB2 = true; IsLevel2 = true;
                             IsB1 = true; IsLevel1 = true;
                             break;
@@ -340,7 +348,7 @@ namespace SimulatorPS2I
             }
 
         }
-     
+
         private void RaiseTimerEvent(ProcessState NextStateOfTheProcess, int TimeInterval)
         {
             if (!_setNextState)
@@ -355,10 +363,40 @@ namespace SimulatorPS2I
         public void ForceNextState(ProcessState NextState)
         {
             CurrentStateOfTheProcess = NextState;
-        }
-
+        } 
+        #endregion
 
         #region UI_updates
+        //pentru Potentiometrul P1 umplere
+        private double _p1Value;    
+        public double P1Value
+        {
+            get
+            {
+                return _p1Value;
+            }
+            set
+            {
+                _p1Value = value;
+                OnPropertyChanged(nameof(P1Value));
+            }
+        }
+
+        //pentru Potentiometrul P2 golire
+        private double _p2Value;
+        public double P2Value
+        {
+            get
+            {
+                return _p2Value;
+            }
+            set
+            {
+                _p2Value = value;
+                OnPropertyChanged(nameof(P2Value));
+            }
+        }
+
         //pentru senzorul B5     
         private bool _isB5;
         public bool IsB5
