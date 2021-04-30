@@ -72,8 +72,12 @@ C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\bin\System.Web.WebPages.Razor.xml
 C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\bin\Newtonsoft.Json.xml
 C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\bin\Antlr3.Runtime.pdb
 C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\obj\Debug\PS2IMVC.csprojAssemblyReference.cache
 C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\obj\Debug\PS2IMVC.csproj.CoreCompileInputs.cache
 C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\obj\Debug\PS2IMVC.csproj.CopyComplete
 C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\obj\Debug\PS2IMVC.dll
 C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\obj\Debug\PS2IMVC.pdb
+C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\bin\EntityFramework.dll
+C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\bin\EntityFramework.SqlServer.dll
+C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\bin\EntityFramework.xml
+C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\bin\EntityFramework.SqlServer.xml
+C:\Users\bossu\source\repos\PS2IMVC\PS2IMVC\obj\Debug\PS2IMVC.csprojAssemblyReference.cache

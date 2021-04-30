@@ -10,66 +10,191 @@
         html {
             height: 100%;
             position: relative;
+            user-select: none;
         }
-/*        td {
-            padding: 0;
-            margin: 0;
-            width: 10%;
-            height: 100%;
-            position: absolute;
+        p {
+            font-size: 1.75vw;
         }
-        tr {
-            padding: 0;
-            margin: 0;
-            width: 100%;
-            height: 10%;
-            position: absolute;
-        }*/
-
     </style>
 </head>
-<body style="width: 100%; height: 100%; padding: 0; margin: 0;" onload="Refresh()">
-    <img src="~/Static/Boiler.png" style="height: 100%; width: 50%; margin-left: 25%; margin-right: 25%; position: absolute;" />
-    <table style="width: 50%; margin-left: 25%; margin-right: 25%; height: 100%; position: relative;"> 
-    @for(int i = 0; i < 100; i++)
-    {
-        <tr>
-            @for (int j = 0; j < 10; j++)
-            {
-                if (j >= 3 && j <= 6 && i >= 23 && i <= 79)
-                {
-                    if (j == 3)
-                    {
-                        <td data-i="@i" data-j="@j" style="width: 4%;"></td>
-                    }
-                    else if (j == 6)
-                    {
-                        <td data-i="@i" data-j="@j" style="width: 0.5%;"></td>
-                    }
-                    else
-                    {
-                        <td data-i="@i" data-j="@j"></td>
-                    }
-                }
-                else
-                {
-                    if (j == 3)
-                    {
-                        <td style="width: 4%;"></td>
-                    }
-                    else if (j == 6)
-                    {
-                        <td style="width: 0.5%;"></td>
-                    }
-                    else
-                    {
-                        <td></td>
-                    }
-                }
+<body style="width: 100%; height: 100%; padding: 0; margin: 0;"> @*onload="Refresh()">*@
+    @*<div style="height: 10%; width: 100%; background-color: red;">
+        <ul style="display: inline;">
+            <li>
+                @Html.ActionLink("ParametriBoiler", "Index", "ParametriBoiler")
+            </li>
+        </ul>
+    </div>*@
+    <div style="height: 100%; width: 100%; position: relative;">
+        <div style="width: calc(25% - 5px); position: absolute; height: calc(45% - 5px); top: 5px; right: 5px; border: 5px solid black; border-radius: 25px;">
+            <div style="position: relative; width: 100%; height: 16.66%;">
 
+                <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S0</p>
+                <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
+                <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Empty</p>
+            </div>
+            <div style="position: relative; width: 100%; height: 16.66%;">
+                <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H1</p>
+                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; cursor: pointer;"></div>
+                <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S1</p>
+                <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
+                <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 1</p>
+            </div>
+            <div style="position: relative; width: 100%; height: 16.66%;">
+                <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H2</p>
+                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; cursor: pointer;"></div>
+                <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S2</p>
+                <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
+                <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 2</p>
+            </div>
+            <div style="position: relative; width: 100%; height: 16.66%;">
+                <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H3</p>
+                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; cursor: pointer;"></div>
+                <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S3</p>
+                <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
+                <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 3</p>
+            </div>
+            <div style="position: relative; width: 100%; height: 16.66%;">
+                <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H4</p>
+                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; cursor: pointer;"></div>
+                <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S4</p>
+                <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
+                <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 4</p>
+            </div>
+            <div style="position: relative; width: 100%; height: 16.66%;">
+                <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S5</p>
+                <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
+                <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Full</p>
+            </div>
+        </div>
+        <p style="position: absolute; top: 50%; right: 0; margin: 0;">S11</p>
+        <div class="round_height" data-enabled="false" style="position: absolute; height: 10%; top: 45%; right: 2.5%;">
+            <div class="button_enable" style="position: absolute; width: 50%; z-index: 1; height: 50%; cursor: pointer; border: 1px solid black; border-radius: 50%; left: 25%; right: 25%; top: 25%; bottom: 25%;">
+                <div style="position: absolute; width: 50%; height: 50%; border: 1px solid black; border-radius: 50%; margin-left: 25%; margin-right: 25%; margin-top: 25%; margin-bottom: 25%;">
+
+                </div>
+            </div>
+            <svg style="width: 100%; height: 100%; position: absolute; top: 0%; z-index: 0;">
+                <line class="button_enable" x1="35%" y1="15%" x2="39%" y2="50%" stroke="black" stroke-width="1px" style="cursor: pointer;" />
+                <line class="button_enable" x1="65%" y1="15%" x2="61%" y2="50%" stroke="black" stroke-width="1px" style="cursor: pointer;" />
+                <line class="button_enable" x1="35%" y1="15%" x2="65%" y2="15%" stroke="black" stroke-width="1px" style="cursor: pointer;" />
+            </svg>
+            <svg style="width: 100%; height: 15%; position: absolute; top: 0%;">
+                <circle class="button_enable" cx="50%" cy="100%" r="20%" stroke="black" stroke-width="1px" fill="white" style="cursor: pointer;" />
+            </svg>
+        </div>
+        <div style="width: calc(25% - 5px); position: absolute; height: calc(45% - 5px); top: 55%; right: 5px; border: 5px solid black; border-radius: 25px;">
+            <div style="width: 75%; margin-left: 12.5%; margin-right: 12.5%; height: 50%; border-bottom: 2.5px solid grey; position: relative;">
+                <p style="position: absolute; width: 100%; height: 10%; top: 0; text-align: center; margin: 0; font-size: 1.25vw;">M1 Supply Rate</p>
+                <div class="round" style="position: absolute; bottom: 0; width: 50%; left: 25%; z-index: 0; right: 25%;">
+                    <p style="position: absolute; top: 0; width: 100%; text-align: center; margin: 0; font-size: 1.25vw;">50</p>
+                    <p style="position: absolute; bottom: 2.5%; left: 11.5%; margin: 0; font-size: 1.25vw;">0</p>
+                    <p style="position: absolute; bottom: 2.5%; right: 7.5%; margin: 0; font-size: 1.25vw;">100</p>
+                    <svg style="height: 100%; width: 100%;">
+                        <line x1="20%" y1="80%" x2="30%" y2="70%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="12.5%" y1="67.5%" x2="25%" y2="61.5%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="10%" y1="50%" x2="22.5%" y2="50%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="12.5%" y1="32.5%" x2="25%" y2="37.5%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="12.5%" y1="32.5%" x2="25%" y2="37.5%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="20%" y1="20%" x2="30%" y2="30%" stroke="black" stroke-width="0.35vw" />
+
+                        <line x1="70%" y1="70%" x2="80%" y2="80%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="76.5%" y1="61.5%" x2="90%" y2="67.5%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="75%" y1="37.5%" x2="88%" y2="31%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="70%" y1="30%" x2="80%" y2="20%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="77.5%" y1="50%" x2="90%" y2="50%" stroke="black" stroke-width="0.35vw" />
+
+
+                        <line x1="50%" y1="22.5%" x2="50%" y2="15%" stroke="black" stroke-width="0.35vw" />
+
+
+                    </svg>
+                    <div class="round" style="position: absolute; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; left: 25%; z-index: 1; right: 25%; width: 50%; border: 7.5px double black; border-radius: 50%; cursor: pointer;">
+                        <svg style="width: 100%; height: 100%; border-radius: 50%;">
+                            <line id="P1" x1="50%" y1="50%" x2="0%" y2="100%" stroke="black" stroke-width="0.35vw" />
+                        </svg>
+                    </div>
+                </div>
+                <p style="position: absolute; width: 10%; height: 15%; bottom: 0; left: 45%; right: 45%; font-size: 1.5vw; text-align: center; margin: 0;">%</p>
+            </div>
+            <div style="width: 75%; margin-left: 12.5%; margin-right: 12.5%; height: 50%; border-top: 2.5px solid grey; position: relative;">
+                <p style="width: 100%; height: 15%; text-align: center; margin: 0; font-size: 1.25vw;">Y1 Discharge Rate</p>
+                <div class="round" style="position: absolute; bottom: 0; width: 50%; left: 25%; z-index: 0; right: 25%;">
+                    <p style="position: absolute; top: 0; width: 100%; text-align: center; margin: 0; font-size: 1.25vw;">50</p>
+                    <p style="position: absolute; bottom: 2.5%; left: 11.5%; margin: 0; font-size: 1.25vw;">0</p>
+                    <p style="position: absolute; bottom: 2.5%; right: 7.5%; margin: 0; font-size: 1.25vw;">100</p>
+                    <svg style="height: 100%; width: 100%;">
+                        <line x1="20%" y1="80%" x2="30%" y2="70%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="12.5%" y1="67.5%" x2="25%" y2="61.5%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="10%" y1="50%" x2="22.5%" y2="50%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="12.5%" y1="32.5%" x2="25%" y2="37.5%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="12.5%" y1="32.5%" x2="25%" y2="37.5%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="20%" y1="20%" x2="30%" y2="30%" stroke="black" stroke-width="0.35vw" />
+
+                        <line x1="70%" y1="70%" x2="80%" y2="80%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="76.5%" y1="61.5%" x2="90%" y2="67.5%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="75%" y1="37.5%" x2="88%" y2="31%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="70%" y1="30%" x2="80%" y2="20%" stroke="black" stroke-width="0.35vw" />
+                        <line x1="77.5%" y1="50%" x2="90%" y2="50%" stroke="black" stroke-width="0.35vw" />
+
+
+                        <line x1="50%" y1="22.5%" x2="50%" y2="15%" stroke="black" stroke-width="0.35vw" />
+
+
+                    </svg>
+                    <div class="round" style="position: absolute; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; left: 25%; z-index: 1; right: 25%; width: 50%; border: 7.5px double black; border-radius: 50%; cursor: pointer;">
+                        <svg style="width: 100%; height: 100%; border-radius: 50%;">
+                            <line id="P2" x1="50%" y1="50%" x2="0%" y2="100%" stroke="black" stroke-width="0.35vw" />
+                        </svg>
+                    </div>
+                </div>
+                <p style="position: absolute; width: 10%; height: 15%; bottom: 0; left: 45%; right: 45%; font-size: 1.5vw; text-align: center; margin: 0;">%</p>
+            </div>
+        </div>
+        <img src="~/Static/Boiler.png" style="height: 100%; width: 50%; margin-left: 25%; margin-right: 25%; position: absolute;" />
+        <table style="width: 50%; margin-left: 25%; margin-right: 25%; height: 100%; position: relative;">
+            @for (int i = 0; i < 100; i++)
+            {
+                <tr>
+                    @for (int j = 0; j < 10; j++)
+                    {
+                        if (j >= 3 && j <= 6 && i >= 23 && i <= 79)
+                        {
+                            if (j == 3)
+                            {
+                                <td data-i="@i" data-j="@j" style="width: 4%;"></td>
+                            }
+                            else if (j == 6)
+                            {
+                                <td data-i="@i" data-j="@j" style="width: 0.5%;"></td>
+                            }
+                            else
+                            {
+                                <td data-i="@i" data-j="@j"></td>
+                            }
+                        }
+                        else
+                        {
+                            if (j == 3)
+                            {
+                                <td style="width: 4%;"></td>
+                            }
+                            else if (j == 6)
+                            {
+                                <td style="width: 0.5%;"></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        }
+
+                    }
+                </tr>
             }
-        </tr>
-    }
+        </table>
+    </div>
+
 
 
     <div class="container body-content">
@@ -81,6 +206,25 @@
     @RenderSection("scripts", required: false)
 
     <script>
+
+        window.addEventListener('load', function () {
+            var rounds = $('.round');
+            for (var i = 0; i < rounds.length; i++)
+                rounds.eq(i).css('height', rounds.eq(i).outerWidth() + 'px');
+            rounds = $('.round_height');
+            for (var j = 0; j < rounds.length; j++)
+                rounds.eq(j).css('width', rounds.eq(j).outerHeight() + 'px');
+        });
+        window.addEventListener('resize', function () {
+            var rounds = $('.round');
+            for (var i = 0; i < rounds.length; i++)
+                rounds.eq(i).css('height', rounds.eq(i).outerWidth() + 'px');
+            rounds = $('.round_height');
+            for (var j = 0; j < rounds.length; j++)
+                rounds.eq(j).css('width', rounds.eq(j).outerHeight() + 'px');
+        });
+
+
         var i = 79;
         function Refresh() {
             $('td[data-i=' + i + '][data-j=' + 6 + '], td[data-i=' + i + '][data-j=' + 5 + '], td[data-i=' + i + '][data-j=' + 4 + '], td[data-i=' + i + '][data-j=' + 3 + ']').css('background-color', 'rgba(0, 0, 0, 0.5)');
@@ -88,6 +232,96 @@
             if(i >= 23)
                 setTimeout(Refresh, 100);
         }
+
+        var P1 = false
+        var P2 = false
+        var lastX, lastY
+
+        $('#P1').mousedown(function (e) {
+            P1 = true;
+            lastX = e.clientX;
+            lastY = e.clientY;
+        });
+
+        $('#P2').mousedown(function (e) {
+            P2 = true;
+            lastX = e.clientX;
+            lastY = e.clientY;
+        });
+
+        $('html').mouseup(function () {
+            if (P1 == true)
+                P1 = false;
+            else if (P2 == true)
+                P2 = false;
+        });
+
+        $('html').mouseover(function (e) {
+            if (P1 == true || P2 == true) {
+                if (P1 == true)
+                {
+                    var x2 = $('#P1').attr('x2');
+                    var y2 = $('#P1').attr('y2');
+                }
+                else if (P2 == true)
+                {
+                    var x2 = $('#P2').attr('x2');
+                    var y2 = $('#P2').attr('y2');
+                }
+                x2 = x2.substring(0, x2.lastIndexOf('%'));
+                y2 = y2.substring(0, y2.lastIndexOf('%'));
+                if (e.clientX - lastX > 0)
+                {
+                    if (+y2 == 0 && x2 < 100)
+                        x2 = +x2 + 50;
+                }
+                else if (e.clientX - lastX < 0)
+                    if (+y2 == 0 && x2 > 0)
+                        x2 = +x2 - 50;
+                if (e.clientY - lastY > 0) {
+                    if (+x2 != 50 && +y2 < 100)
+                        y2 = +y2 + 25;
+                }
+                else if (e.clientY - lastY < 0)
+                    if (+x2 != 50 && +y2 > 0)
+                        y2 = +y2 - 25;
+
+                if (P1 == true)
+                {
+                    $('#P1').attr('x2', x2 + '%');
+                    $('#P1').attr('y2', y2 + '%');
+                }
+                else if (P2 == true)
+                {
+                    $('#P2').attr('x2', x2 + '%');
+                    $('#P2').attr('y2', y2 + '%');
+                }
+
+                lastX = e.clientX;
+                lastY = e.clientY;
+            }
+        });
+
+        $('.button_enable').on('click', function () {
+            var parent = $(this).parents('div');
+            var lines = parent.find('svg').eq(0).find('line');
+            if (parent.data('enabled') == false) {
+                lines.eq(0).attr('y1', '85%');
+                lines.eq(1).attr('y1', '85%');
+                lines.eq(2).attr('y1', '85%').attr('y2', '85%');
+                parent.find('svg').eq(1).css('top', '85%').find('circle').attr('cy', '0');
+                parent.data('enabled', true);
+            }
+            else {
+                lines.eq(0).attr('y1', '15%');
+                lines.eq(1).attr('y1', '15%');
+                lines.eq(2).attr('y1', '15%').attr('y2', '15%');
+                parent.find('svg').eq(1).css('top', '0').find('circle').attr('cy', '100%');
+                parent.data('enabled', false);
+            }
+            //console.log($(this).parents('div').data('enabled'));
+        })
+
     </script>
 
 </body>
