@@ -33,7 +33,20 @@ namespace SimulatorPS2I
         private bool _setNextState = false;
         private bool _isSendingData = false;
         private BackgroundWorker _worker = new BackgroundWorker();
+
         public float capacitate;
+        public float debMaxP1;
+        public float debMaxP2;
+        public float nivel_curent;
+        public int prag1;
+        public int prag2;
+        public int prag3;
+        public int prag4;
+        public int prag5;
+        public bool getParameters;
+
+
+        private float timp_nivel;
 
         public void Init()
         {
@@ -41,7 +54,7 @@ namespace SimulatorPS2I
             {
                 //_sender = new Comm.Sender("127.0.0.1", 3000);
             }
-            
+            getParameters = false;
             current_level = 0;
             capacitate = 0;
             _timer.Elapsed += _timer_Elapsed;
@@ -50,9 +63,20 @@ namespace SimulatorPS2I
             
         }
 
-        public void GetConditions()
+        public void GetConditions(float capacitate, float debMaxP1, float debMaxP2, float nivel_curent, int prag1, int prag2, int prag3, int prag4, int prag5)
         {
+            this.capacitate = capacitate;
+            this.debMaxP1 = debMaxP1;
+            this.debMaxP2 = debMaxP2;
+            this.nivel_curent = nivel_curent;
+            this.prag1 = prag1;
+            this.prag2 = prag2;
+            this.prag3 = prag3;
+            this.prag4 = prag4;
+            this.prag5 = prag5;
 
+            ForceNextState(ProcessState.On);
+            getParameters = true;
         }
         public void SendData()
         {
@@ -60,8 +84,9 @@ namespace SimulatorPS2I
             {
                 //_sender.Send(Convert.ToByte(_currentStateOfTheProcess));
             }
+            
         }
-
+        
         #region Simulator
         void OnPropertyChanged(string prop)
         {
@@ -106,197 +131,251 @@ namespace SimulatorPS2I
             {
                 case ProcessState.Off:
 
-                    IsB5 = false; IsLevel5 = false;
-                    IsB4 = false; IsLevel4 = false;
-                    IsB3 = false; IsLevel3 = false;
-                    IsB2 = false; IsLevel2 = false;
-                    IsB1 = false; IsLevel1 = false;
+                    Level0();
                     current_level = 0;
                     RaiseTimerEvent(ProcessState.Off, 2000);
                     break;
 
                 case ProcessState.On:
-                    IsB5 = true; IsLevel5 = true;
-                    IsB4 = true; IsLevel4 = true;
-                    IsB3 = true; IsLevel3 = true;
-                    IsB2 = true; IsLevel2 = true;
-                    IsB1 = true; IsLevel1 = true;
-
-                    RaiseTimerEvent(ProcessState.On, 2000);
+                    if (this.nivel_curent >= this.prag1 && this.nivel_curent < (this.prag1 + this.prag2))
+                    {
+                        Level1();
+                        current_level = 1;
+                    }
+                    else if (this.nivel_curent >= this.prag2 && this.nivel_curent < (this.prag1 + this.prag2 + this.prag3))
+                    {
+                        Level2();
+                        current_level = 2;
+                    }
+                    else if (this.nivel_curent >= this.prag3 && this.nivel_curent < (this.prag1 + this.prag2 + this.prag3 + this.prag4))
+                    {
+                        Level3();
+                        current_level = 3;
+                    }
+                    else if (this.nivel_curent >= this.prag4 && this.nivel_curent < (this.prag1 + this.prag2 + this.prag3 + this.prag4 + this.prag5))
+                    {
+                        Level4();
+                        current_level = 4;
+                    }
+                    RaiseTimerEvent(ProcessState.On, 1000);
                     break;
 
                 case ProcessState.Filling:
                     switch (current_level)
                     {
                         case 0:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = false; IsLevel4 = false;
-                            IsB3 = false; IsLevel3 = false;
-                            IsB2 = false; IsLevel2 = false;
-                            IsB1 = false; IsLevel1 = false;
-                            current_level++;
-                            System.Threading.Thread.Sleep(2000);
+                            Level0();
+
+                            if(nivel_curent <= capacitate)
+                            {
+                                timp_nivel = (float)((this.P1Value * this.debMaxP1 * this.prag1) / 1000);
+                                System.Threading.Thread.Sleep((int)timp_nivel);
+                                Console.WriteLine("timp nivel : " + (int)timp_nivel);
+                            }
+                            else
+                            {
+                                RaiseTimerEvent(ProcessState.BlinkOn, 1000);
+                            }
+                           
                             break;
                         case 1:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = false; IsLevel4 = false;
-                            IsB3 = false; IsLevel3 = false;
-                            IsB2 = false; IsLevel2 = false;
-                            IsB1 = true; IsLevel1 = true;
-                            current_level++;
-                            System.Threading.Thread.Sleep(1000);
+                            Level1();
+                            if (nivel_curent <= capacitate)
+                            {
+                                this.nivel_curent += this.prag1;
+                                timp_nivel = (float)((this.P1Value * this.debMaxP1 * this.prag2) / 1000);
+                                System.Threading.Thread.Sleep((int)timp_nivel);
+                                Console.WriteLine("timp nivel : " + (int)timp_nivel);
+                            }
+                            else
+                            {
+                                RaiseTimerEvent(ProcessState.BlinkOn, 1000);
+                            }
+
                             break;
                         case 2:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = false; IsLevel4 = false;
-                            IsB3 = false; IsLevel3 = false;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
-                            current_level++;
-                            System.Threading.Thread.Sleep(1000);
+                            Level2();
+                            if (nivel_curent <= capacitate)
+                            {
+                                this.nivel_curent += this.prag2;
+                                timp_nivel = (float)((this.P1Value * this.debMaxP1 * this.prag2) / 1000);
+                                System.Threading.Thread.Sleep((int)timp_nivel);
+                                Console.WriteLine("timp nivel : " + (int)timp_nivel);
+                            }
+                            else
+                            {
+                                RaiseTimerEvent(ProcessState.BlinkOn, 1000);
+                            }  
+                            
                             break;
                         case 3:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = false; IsLevel4 = false;
-                            IsB3 = true; IsLevel3 = true;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
-                            current_level++;
-                            System.Threading.Thread.Sleep(1000);
+                            Level3();
+                            if (nivel_curent <= capacitate)
+                            {
+                                this.nivel_curent += this.prag3;
+                                timp_nivel = (float)((this.P1Value * this.debMaxP1 * this.prag3) / 1000);
+                                System.Threading.Thread.Sleep((int)timp_nivel);
+
+                                Console.WriteLine("timp nivel : " + (int)timp_nivel);
+
+                            }
+                            else
+                            {
+                                RaiseTimerEvent(ProcessState.BlinkOn, 1000);
+                            }
+                        
                             break;
                         case 4:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = true; IsLevel4 = true;
-                            IsB3 = true; IsLevel3 = true;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
-                            current_level++;
-                            System.Threading.Thread.Sleep(1000);
+                            Level4();
+                            if (nivel_curent <= capacitate)
+                            {
+                                this.nivel_curent += this.prag4;
+                                timp_nivel = (float)((this.P1Value * this.debMaxP1 * this.prag4) / 1000);
+                                System.Threading.Thread.Sleep((int)timp_nivel);
+
+                                Console.WriteLine("timp nivel : " + (int)timp_nivel);
+                            }
+                            else
+                            {
+                                RaiseTimerEvent(ProcessState.BlinkOn, 1000);
+                            }
+                         
                             break;
                         case 5:
-                            IsB5 = true; IsLevel5 = true;
-                            IsB4 = true; IsLevel4 = true;
-                            IsB3 = true; IsLevel3 = true;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
-                            System.Threading.Thread.Sleep(1000);
+                            Level5();
+                            if (nivel_curent <= capacitate)
+                            {
+                                this.nivel_curent += this.prag5;
+                                RaiseTimerEvent(ProcessState.BlinkOn, 500);
+                            }
+                            else
+                            {
+                                RaiseTimerEvent(ProcessState.BlinkOn, 1000);
+                            }
+
                             break;
 
                     }
-                    if (current_level == 5)
+                   
+                    Console.WriteLine("nivel curent : "+this.nivel_curent + " cap max : " + this.capacitate);
+                    if ( current_level != 6)
                     {
-                        RaiseTimerEvent(ProcessState.BlinkOn, 1000);
-                    }
-
-                    RaiseTimerEvent(ProcessState.Filling, 1000);
+                        current_level++;
+                        RaiseTimerEvent(ProcessState.Filling, 1000);
+                    }                    
+               
                     break;
                 case ProcessState.Emptying:
-
+                    if(current_level == 6)
+                    {
+                        current_level--;
+                    }
                     switch (current_level)
                     {
                         case 5:
-                            IsB5 = true; IsLevel5 = true;
-                            IsB4 = true; IsLevel4 = true;
-                            IsB3 = true; IsLevel3 = true;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
-                            current_level--;
-                            System.Threading.Thread.Sleep(1000);
+                            Level5();
+                            if(nivel_curent >= 0)
+                            {
+                                nivel_curent -= this.prag5;
+                                timp_nivel = (float)((this.P2Value * this.debMaxP2 * this.prag5) / 1000);
+                                System.Threading.Thread.Sleep((int)timp_nivel);
+                            }
+                            else
+                            {
+                                RaiseTimerEvent(ProcessState.BlinkOff, 1000);
+                            }
+                                                     
                             break;
                         case 4:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = true; IsLevel4 = true;
-                            IsB3 = true; IsLevel3 = true;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
-                            current_level--;
-                            System.Threading.Thread.Sleep(1000);
+                            Level4();
+                            if (nivel_curent >= 0)
+                            {
+                                nivel_curent -= this.prag4;
+                                timp_nivel = (float)((this.P2Value * this.debMaxP2 * this.prag4) / 1000);
+                                System.Threading.Thread.Sleep((int)timp_nivel);
+                            }
+                            else
+                            {
+                                RaiseTimerEvent(ProcessState.BlinkOff, 1000);
+                            }
+
                             break;
                         case 3:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = false; IsLevel4 = false;
-                            IsB3 = true; IsLevel3 = true;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
-                            current_level--;
-                            System.Threading.Thread.Sleep(1000);
+                            Level3();
+
+                            if (nivel_curent >= 0)
+                            {
+                                nivel_curent -= this.prag3;
+                                timp_nivel = (float)((this.P2Value * this.debMaxP2 * this.prag3) / 1000);
+                                System.Threading.Thread.Sleep((int)timp_nivel);
+                            }
+                            else
+                            {
+                                RaiseTimerEvent(ProcessState.BlinkOff, 1000);
+                            }
+
                             break;
                         case 2:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = false; IsLevel4 = false;
-                            IsB3 = false; IsLevel3 = false;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
-                            current_level--;
-                            System.Threading.Thread.Sleep(1000);
+
+                            Level2();
+                            if (nivel_curent >= 0)
+                            {
+                                nivel_curent -= this.prag2;
+                                timp_nivel = (float)((this.P2Value * this.debMaxP2 * this.prag2) / 1000);
+                                System.Threading.Thread.Sleep((int)timp_nivel);
+                            }
+                            else
+                            {
+                                RaiseTimerEvent(ProcessState.BlinkOff, 1000);
+                            }
+
                             break;
                         case 1:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = false; IsLevel4 = false;
-                            IsB3 = false; IsLevel3 = false;
-                            IsB2 = false; IsLevel2 = false;
-                            IsB1 = true; IsLevel1 = true;
-                            current_level--;
-                            System.Threading.Thread.Sleep(1000);
+                            Level1();
+                            if (nivel_curent >= 0)
+                            {
+                                nivel_curent -= this.prag1;
+                                timp_nivel = (float)((this.P2Value * this.debMaxP2 * this.prag1) / 1000);
+                                System.Threading.Thread.Sleep((int)timp_nivel);
+                            }
+                            else
+                            {
+                                RaiseTimerEvent(ProcessState.BlinkOff, 1000);
+                            }
+
                             break;
                         case 0:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = false; IsLevel4 = false;
-                            IsB3 = false; IsLevel3 = false;
-                            IsB2 = false; IsLevel2 = false;
-                            IsB1 = false; IsLevel1 = false;
-                            System.Threading.Thread.Sleep(2000);
+                            Level0();
+                            RaiseTimerEvent(ProcessState.Off, 1000);
                             break;
                     }
-                    if (current_level == 0)
+                    Console.WriteLine("nivel curent : " + this.nivel_curent + " cap max : " + this.capacitate);
+                    if (current_level != 0)
                     {
-                        RaiseTimerEvent(ProcessState.Off, 1000);
-                    }
-
-                    RaiseTimerEvent(ProcessState.Emptying, 1000);
+                        current_level--;
+                        RaiseTimerEvent(ProcessState.Emptying, 1000);
+                    }                             
                     break;
                 case ProcessState.BlinkOn:
                     switch (current_level)
                     {
                         case 5:
-                            IsB5 = true; IsLevel5 = true;
-                            IsB4 = true; IsLevel4 = true;
-                            IsB3 = true; IsLevel3 = true;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
+                            Level5();
                             break;
                         case 4:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = true; IsLevel4 = true;
-                            IsB3 = true; IsLevel3 = true;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
+                            Level4();
                             break;
                         case 3:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = false; IsLevel4 = false;
-                            IsB3 = true; IsLevel3 = true;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
+                            Level3();
                             break;
                         case 2:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = false; IsLevel4 = false;
-                            IsB3 = false; IsLevel3 = false;
-                            IsB2 = true; IsLevel2 = true;
-                            IsB1 = true; IsLevel1 = true;
+                            Level2();
                             break;
                         case 1:
-                            IsB5 = false; IsLevel5 = false;
-                            IsB4 = false; IsLevel4 = false;
-                            IsB3 = false; IsLevel3 = false;
-                            IsB2 = false; IsLevel2 = false;
-                            IsB1 = true; IsLevel1 = true;
+                            Level1();
                             break;
                     }
 
-                    _setNextState = false;
-                    _timer.Stop();
                     RaiseTimerEvent(ProcessState.BlinkOff, 1000);
                     break;
 
@@ -339,9 +418,6 @@ namespace SimulatorPS2I
                             IsB1 = false; IsLevel1 = true;
                             break;
                     }
-
-                    _setNextState = false;
-                    _timer.Stop();
                     RaiseTimerEvent(ProcessState.BlinkOn, 1000);
                     break;
 
@@ -708,7 +784,64 @@ namespace SimulatorPS2I
         }
 
         #endregion
-    }
 
+        private void Level5()
+        {
+            IsB5 = true; IsLevel5 = true;
+            IsB4 = true; IsLevel4 = true;
+            IsB3 = true; IsLevel3 = true;
+            IsB2 = true; IsLevel2 = true;
+            IsB1 = true; IsLevel1 = true;
+
+        }
+
+        private void Level4()
+        {
+            IsB5 = false; IsLevel5 = false;
+            IsB4 = true; IsLevel4 = true;
+            IsB3 = true; IsLevel3 = true;
+            IsB2 = true; IsLevel2 = true;
+            IsB1 = true; IsLevel1 = true;
+        }
+
+        private void Level3()
+        {
+            IsB5 = false; IsLevel5 = false;
+            IsB4 = false; IsLevel4 = false;
+            IsB3 = true; IsLevel3 = true;
+            IsB2 = true; IsLevel2 = true;
+            IsB1 = true; IsLevel1 = true;
+        }
+
+        private void Level2()
+        {
+            IsB5 = false; IsLevel5 = false;
+            IsB4 = false; IsLevel4 = false;
+            IsB3 = false; IsLevel3 = false;
+            IsB2 = true; IsLevel2 = true;
+            IsB1 = true; IsLevel1 = true;
+        }
+
+        private void Level1()
+        {
+            IsB5 = false; IsLevel5 = false;
+            IsB4 = false; IsLevel4 = false;
+            IsB3 = false; IsLevel3 = false;
+            IsB2 = false; IsLevel2 = false;
+            IsB1 = true; IsLevel1 = true;
+
+        }
+
+        private void Level0()
+        {
+            IsB5 = false; IsLevel5 = false;
+            IsB4 = false; IsLevel4 = false;
+            IsB3 = false; IsLevel3 = false;
+            IsB2 = false; IsLevel2 = false;
+            IsB1 = false; IsLevel1 = false;
+        }
+
+    }
+  
 }
 

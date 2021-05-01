@@ -141,7 +141,20 @@
                 <TextBlock  Text="Stare mentinere" Foreground="Black" FontSize="16" RenderTransformOrigin="2.25,1.912" Height="28" Width="111" />
             </Button>
 
-            <ScrollBar Name="P1Scrollbar"  Background="LightGreen" Grid.Column="22" Foreground="Aqua" Grid.Row="9" Grid.RowSpan="3" Margin="38.2,12,0,40.2" Width="23" Grid.ColumnSpan="2" HorizontalAlignment="Left" Value="{Binding P1Value}" RenderTransformOrigin="0.5,0.5" ValueChanged="P1Scrollbar_ValueChanged">
+            <ScrollBar 
+                    Name="P1Scrollbar"  
+                    Background="LightGreen" 
+                    Grid.Column="22" 
+                    Foreground="Aqua" 
+                    Grid.Row="9" 
+                    Grid.RowSpan="3" 
+                    Margin="38.2,12,0,40.2" 
+                    Width="23"                   
+                    Grid.ColumnSpan="2" 
+                    HorizontalAlignment="Left" 
+                    Value="{Binding P1Value}"                   
+                    RenderTransformOrigin="0.5,0.5" 
+                    ValueChanged="P1Scrollbar_ValueChanged" >
                 <ScrollBar.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -171,11 +184,14 @@
             <Border  Grid.Row="8" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,0.4,0.2,0" Visibility="{Binding IsLevel2Visible }"/>
             <Border  Grid.Row="9" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,0,0.2,0.4" Visibility="{Binding IsLevel1Visible }"/>
             <Border  CornerRadius="0" Grid.Row="9" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,22,0.2,22.8" Visibility="{Binding IsLevel1Visible }" Grid.RowSpan="2"/>
-            <Label Name="InitCondLabel" Foreground="Red" Grid.Column="20" HorizontalAlignment="Left" Margin="22,10,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="16" FontWeight="SemiBold" Grid.ColumnSpan="6" Height="35" Width="250"/>
+            <Label Name="InitCondLabel" Foreground="Red" Grid.Column="16" HorizontalAlignment="Left" Margin="23.6,12,0,2.6" Grid.Row="2" VerticalAlignment="Center" FontSize="16" FontWeight="SemiBold" Grid.ColumnSpan="10" Height="35" Width="450"/>
+            <Label Name="FullOrEmptyLabel" Foreground="Aqua" Grid.ColumnSpan="5" Grid.Column="18" HorizontalAlignment="Left" Height="39" Margin="2.8,0.8,0,0" Grid.Row="4" VerticalAlignment="Top" Width="210" FontSize="16" FontWeight="SemiBold" />
 
 
 
 
         </Grid>
+        <Label  Name="GetParametersLabel" HorizontalAlignment="Left" Margin="1050,360,0,390.4" VerticalAlignment="Top" Width="235" FontSize="16" Foreground="LightGreen" FontWeight="SemiBold" Height="40" RenderTransformOrigin="0.511,0.592"/>
+        <Label Name="PotentiometruSetLabel" HorizontalAlignment="Left" Margin="1050,410,0,0" VerticalAlignment="Top" Height="45" Width="235" FontSize="16" FontWeight="SemiBold" Foreground="Aqua"/>
     </Grid>
 </UserControl>

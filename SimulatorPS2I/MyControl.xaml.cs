@@ -31,8 +31,7 @@ namespace SimulatorPS2I
         public int prag3;
         public int prag4;
         public int prag5;
-        public bool[] isEnabledButton = new bool[9];
-
+        public bool[] isEnabledButton = new bool[9];       
         public double valueOfP1;
         public double valueOfP2;
 
@@ -50,8 +49,10 @@ namespace SimulatorPS2I
             this.FillButton.IsEnabled = false;
             this.EmptyButton.IsEnabled = false;
             this.MantainButton.IsEnabled = false;
-                                
+           
         }
+
+       
 
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
@@ -68,11 +69,42 @@ namespace SimulatorPS2I
             {
 
                 //aici trimitem conditiile initiale catre ViewModel
+                //in aceasta metoda vom trimite datele initiale pe urma se va calcula instant formula pentru capacitate debit in functie 
+               // de potentiometre iar pe urma timpul de la fiecare nivel 
+
+                /*
+                 Exemplu cu praguri
+                 nivel 5  - 10 % capacitate
+                 nivel 4  - 20 % capacitate
+                 nivel 3  - 20 % capacitate
+                 nivel 2  - 20 % capacitate
+                 nivel 1  - 30 % capacitate
+                 */
                 this.InitCondLabel.Content = "";
-                _vmb.GetConditions();
+                int sumOfLevels = this.prag1 + this.prag2 + this.prag3 + this.prag4 + this.prag5;
+                if(sumOfLevels <= this.cap)
+                {
+                    this.InitCondLabel.Content = "";
+                    _vmb.GetConditions(this.cap, this.debMaxP1, this.debMaxP2, this.nivCurent, this.prag1, this.prag2, this.prag3, this.prag4, this.prag5);
+                }
+                else
+                {
+                    this.InitCondLabel.Content = "Suma pragurilor sa fie maxim capacitatea!";
+                }
+               
+
                 this.FillButton.IsEnabled = true;
                 this.EmptyButton.IsEnabled = true;
                 this.MantainButton.IsEnabled = true;
+                if (_vmb.getParameters)
+                {
+                    this.GetParametersLabel.Content = "Trimis cu success parametrii";
+
+                }
+                else
+                {
+                    this.GetParametersLabel.Content = "";
+                }
             }
             else
             {
@@ -83,18 +115,43 @@ namespace SimulatorPS2I
 
         private void Button_Click_S2(object sender, RoutedEventArgs e)
         {
-            _vmb.ForceNextState(ProcessState.Filling); //umplere 
-
+            this.GetParametersLabel.Content = "";
+                  
+            _vmb.P1Value = this.valueOfP1;
+            _vmb.P2Value = this.valueOfP2;
             //trebuie pasat valoarea din P1 dar si din P2 , iar umplerea/ golirea sa se faca in functie de p1 si p2
             this.P1Scrollbar.IsEnabled = true;
             this.P2Scrollbar.IsEnabled = false;
+            this.P1Scrollbar.Maximum = this.debMaxP1;
+
+            if (this.P1Scrollbar.Value > 0)
+            {
+                this.PotentiometruSetLabel.Content = "";
+                _vmb.ForceNextState(ProcessState.Filling); //umplere 
+            }
+            else
+            {
+                this.PotentiometruSetLabel.Content = "Setati Potentiometrul!";
+            }
         }
 
         private void Button_Click_S3(object sender, RoutedEventArgs e)
         {
-            _vmb.ForceNextState(ProcessState.Emptying); //golire
+            this.GetParametersLabel.Content = "";         
             this.P1Scrollbar.IsEnabled = false;
             this.P2Scrollbar.IsEnabled = true;
+            this.P2Scrollbar.Maximum = this.debMaxP2;
+
+            if (this.P2Scrollbar.Value > 0 && this._vmb.nivel_curent != 0)
+            {
+                this.PotentiometruSetLabel.Content = "";
+                _vmb.ForceNextState(ProcessState.Emptying); //golire
+            }
+            else
+            {
+                this.PotentiometruSetLabel.Content = "Setati Potentiometrul!";
+            }
+
         }
         private void Button_Click_S4(object sender, RoutedEventArgs e)
         {
@@ -103,7 +160,7 @@ namespace SimulatorPS2I
         }
         private void Button_Submit(object sender, RoutedEventArgs e)
         {
-
+            this.GetParametersLabel.Content = "";
             //in aceasta metoda vom trimite datele prin intermediul unui tcp catre un server
             this.cap = float.Parse(capacitate.Text);
             this.debMaxP1 = float.Parse(debitMaxP1.Text);
@@ -352,13 +409,13 @@ namespace SimulatorPS2I
        
         private void P1Scrollbar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            valueOfP1 = _vmb.P1Value * 100;
+            valueOfP1 = _vmb.P1Value;
             Console.WriteLine(valueOfP1);
         }
 
         private void P2Scrollbar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            valueOfP2 = _vmb.P2Value * 100;
+            valueOfP2 = _vmb.P2Value;
             Console.WriteLine(valueOfP2);
         }
     }
