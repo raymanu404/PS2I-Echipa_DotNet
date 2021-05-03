@@ -73,7 +73,7 @@ namespace SimulatorPS2I
                // de potentiometre iar pe urma timpul de la fiecare nivel 
 
                 /*
-                 Exemplu cu praguri
+                 Exemplu de praguri
                  nivel 5  - 10 % capacitate
                  nivel 4  - 20 % capacitate
                  nivel 3  - 20 % capacitate
@@ -84,6 +84,23 @@ namespace SimulatorPS2I
                 int sumOfLevels = this.prag1 + this.prag2 + this.prag3 + this.prag4 + this.prag5;
                 if(sumOfLevels <= this.cap)
                 {
+                    if (P1Scrollbar.IsEnabled)
+                    {
+                        P1Scrollbar.Value = this.valueOfP1;
+                    }
+                    else
+                    {
+                        P1Scrollbar.Value = 0.1;
+                    }
+                    if (P2Scrollbar.IsEnabled)
+                    {
+                        P2Scrollbar.Value = this.valueOfP2;
+                    }
+                    else
+                    {
+                        P2Scrollbar.Value = 0.1;
+                    }
+
                     this.InitCondLabel.Content = "";
                     _vmb.GetConditions(this.cap, this.debMaxP1, this.debMaxP2, this.nivCurent, this.prag1, this.prag2, this.prag3, this.prag4, this.prag5);
                 }
@@ -119,7 +136,12 @@ namespace SimulatorPS2I
                   
             _vmb.P1Value = this.valueOfP1;
             _vmb.P2Value = this.valueOfP2;
-            //trebuie pasat valoarea din P1 dar si din P2 , iar umplerea/ golirea sa se faca in functie de p1 si p2
+
+            if (P2Scrollbar.IsEnabled)
+            {
+                _vmb.P2Value = 0.0001;
+            }
+            
             this.P1Scrollbar.IsEnabled = true;
             this.P2Scrollbar.IsEnabled = false;
             this.P1Scrollbar.Maximum = this.debMaxP1;
@@ -137,11 +159,15 @@ namespace SimulatorPS2I
 
         private void Button_Click_S3(object sender, RoutedEventArgs e)
         {
+
             this.GetParametersLabel.Content = "";         
             this.P1Scrollbar.IsEnabled = false;
             this.P2Scrollbar.IsEnabled = true;
             this.P2Scrollbar.Maximum = this.debMaxP2;
-
+            if (P1Scrollbar.IsEnabled)
+            {
+                _vmb.P1Value = 0.0001;
+            }
             if (this.P2Scrollbar.Value > 0 && this._vmb.nivel_curent != 0)
             {
                 this.PotentiometruSetLabel.Content = "";
@@ -155,7 +181,10 @@ namespace SimulatorPS2I
         }
         private void Button_Click_S4(object sender, RoutedEventArgs e)
         {
-            _vmb.ForceNextState(ProcessState.BlinkOn);   //stop sau mentinere
+            this.P1Scrollbar.IsEnabled = true;
+            this.P2Scrollbar.IsEnabled = true;
+            _vmb.ForceNextState(ProcessState.BlinkOn);   //in functie de Potentiometre avem umplere sau golire iar daca acestea
+                                                        // sunt egale (P1 == P2 ) atunci vom avea mentinere
 
         }
         private void Button_Submit(object sender, RoutedEventArgs e)
@@ -411,12 +440,20 @@ namespace SimulatorPS2I
         {
             valueOfP1 = _vmb.P1Value;
             Console.WriteLine(valueOfP1);
+            if (P2Scrollbar.IsEnabled)
+            {
+                valueOfP2 = 0.1;
+            }
         }
 
         private void P2Scrollbar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             valueOfP2 = _vmb.P2Value;
             Console.WriteLine(valueOfP2);
+            if (P1Scrollbar.IsEnabled)
+            {
+                valueOfP1 = 0.1;
+            }
         }
     }
 }

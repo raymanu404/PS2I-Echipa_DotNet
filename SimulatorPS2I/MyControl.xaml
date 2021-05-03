@@ -146,11 +146,10 @@
                     Background="LightGreen" 
                     Grid.Column="22" 
                     Foreground="Aqua" 
-                    Grid.Row="9" 
+                    Grid.Row="10" 
                     Grid.RowSpan="3" 
-                    Margin="38.2,12,0,40.2" 
-                    Width="23"                   
-                    Grid.ColumnSpan="2" 
+                    Margin="3.2,1.6,0,20.6" 
+                    Width="23" 
                     HorizontalAlignment="Left" 
                     Value="{Binding P1Value}"                   
                     RenderTransformOrigin="0.5,0.5" 
@@ -159,23 +158,21 @@
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-89.427"/>
+                        <RotateTransform Angle="0.274"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </ScrollBar.RenderTransform>
             </ScrollBar>
-            <ScrollBar Name="P2Scrollbar"  Background="LightGreen" Grid.Column="22" Grid.Row="10" Grid.RowSpan="3" Margin="41.2,35.6,36.6,14.6" Width="Auto" Value="{Binding P2Value}" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" ValueChanged="P2Scrollbar_ValueChanged" >
+            <ScrollBar Name="P2Scrollbar"  Background="LightGreen" Grid.Column="24" Grid.Row="10" Grid.RowSpan="3" Margin="0.4,1.6,27,19.6" Width="Auto" Value="{Binding P2Value}" RenderTransformOrigin="0.5,0.5" ValueChanged="P2Scrollbar_ValueChanged" >
                 <ScrollBar.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-89.619"/>
+                        <RotateTransform Angle="0.229"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </ScrollBar.RenderTransform>
             </ScrollBar>
-            <Label Content="Potentiometru pentru umplere" Grid.Column="22" HorizontalAlignment="Left" Margin="0.2,22,0,0" Grid.Row="9" VerticalAlignment="Top" Grid.ColumnSpan="4" Width="171"/>
-            <Label Content="Potentiometru pentru golire" Grid.Column="22" HorizontalAlignment="Left" Margin="2.2,0.2,0,0" Grid.Row="11" VerticalAlignment="Top" Grid.ColumnSpan="4" Width="169"/>
 
 
             <Border  Grid.Row="5" Grid.Column="15" Grid.ColumnSpan="3" Background="Aqua" Margin="10,0.2,0.2,0.4" Visibility="{Binding IsLevel5Visible }" />
@@ -193,5 +190,14 @@
         </Grid>
         <Label  Name="GetParametersLabel" HorizontalAlignment="Left" Margin="1050,360,0,390.4" VerticalAlignment="Top" Width="235" FontSize="16" Foreground="LightGreen" FontWeight="SemiBold" Height="40" RenderTransformOrigin="0.511,0.592"/>
         <Label Name="PotentiometruSetLabel" HorizontalAlignment="Left" Margin="1050,410,0,0" VerticalAlignment="Top" Height="45" Width="235" FontSize="16" FontWeight="SemiBold" Foreground="Aqua"/>
+        <Label Content="+" HorizontalAlignment="Left" Margin="1125,510,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.432,0.578"/>
+        <Label Content="+" HorizontalAlignment="Left" Margin="1220,510,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.432,0.578"/>
+        <Label Content="-" HorizontalAlignment="Left" Margin="1125,614,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.432,0.578" Width="15"/>
+        <Label Content="-" HorizontalAlignment="Left" Margin="1227,614,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.432,0.578" Width="18"/>
+        <Label Content="P1" HorizontalAlignment="Left" Margin="1101,479,0,0" VerticalAlignment="Top"/>
+        <Label Content="P2" HorizontalAlignment="Left" Margin="1200,479,0,0" VerticalAlignment="Top" Width="25"/>
+        <Label Content="Legenda  " HorizontalAlignment="Left" Height="30" Margin="1050,25,0,0" VerticalAlignment="Top" Width="60"/>
+        <Label Content="P1- Potentiometru pentru umplere" HorizontalAlignment="Left" Height="30" Margin="1050,55,0,0" VerticalAlignment="Top" Width="225"/>
+        <Label Content="P2- Potentiometru pentru golire" HorizontalAlignment="Left" Height="30" Margin="1050,85,0,0" VerticalAlignment="Top" Width="225"/>
     </Grid>
 </UserControl>

@@ -44,7 +44,7 @@ namespace SimulatorPS2I
         public int prag4;
         public int prag5;
         public bool getParameters;
-
+        private float valueOfP;
 
         private float timp_nivel;
 
@@ -57,6 +57,7 @@ namespace SimulatorPS2I
             getParameters = false;
             current_level = 0;
             capacitate = 0;
+            valueOfP = 0;
             _timer.Elapsed += _timer_Elapsed;
             _worker.DoWork += _worker_DoWork;
             _worker.RunWorkerAsync();
@@ -88,12 +89,27 @@ namespace SimulatorPS2I
         }
         
         #region Simulator
+
         void OnPropertyChanged(string prop)
         {
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        private void RaiseTimerEvent(ProcessState NextStateOfTheProcess, int TimeInterval)
+        {
+            if (!_setNextState)
+            {
+                _setNextState = true;
+                _nextstate = NextStateOfTheProcess;
+                _timer.Interval = TimeInterval;
+                _timer.Start();
+            }
+        }
 
+        public void ForceNextState(ProcessState NextState)
+        {
+            CurrentStateOfTheProcess = NextState;
+        }
 
         private ProcessState _currentStateOfTheProcess = ProcessState.Off;
         public ProcessState CurrentStateOfTheProcess
@@ -161,6 +177,16 @@ namespace SimulatorPS2I
                     break;
 
                 case ProcessState.Filling:
+                    //trebuie pentru P1 
+                    
+                    if (this.P1Value == 0)
+                        this.P1Value = 1;
+                    if (this.P2Value == 0.1)
+                    {
+                        this.valueOfP = (float)this.P1Value;
+                    }
+                    Console.WriteLine("P1 : " + this.P1Value + " \nP2: " + this.P2Value);
+                    Console.WriteLine("suma : " + (valueOfP) );
                     switch (current_level)
                     {
                         case 0:
@@ -168,9 +194,14 @@ namespace SimulatorPS2I
 
                             if(nivel_curent <= capacitate)
                             {
-                                timp_nivel = (float)((this.P1Value * this.debMaxP1 * this.prag1) / 1000);
+                                if(valueOfP < 0)
+                                {
+                                    valueOfP *= (-1);
+                                }
+                                timp_nivel = (float)((this.valueOfP * this.debMaxP1 * this.prag1) / 1000);
                                 System.Threading.Thread.Sleep((int)timp_nivel);
-                                Console.WriteLine("timp nivel : " + (int)timp_nivel);
+                                //RaiseTimerEvent(ProcessState.Filling, 2000);
+                               
                             }
                             else
                             {
@@ -182,10 +213,15 @@ namespace SimulatorPS2I
                             Level1();
                             if (nivel_curent <= capacitate)
                             {
+                                if (valueOfP < 0)
+                                {
+                                    valueOfP *= (-1);
+                                }
                                 this.nivel_curent += this.prag1;
-                                timp_nivel = (float)((this.P1Value * this.debMaxP1 * this.prag2) / 1000);
+                                timp_nivel = (float)((this.valueOfP * this.debMaxP1 * this.prag2) / 1000);
                                 System.Threading.Thread.Sleep((int)timp_nivel);
-                                Console.WriteLine("timp nivel : " + (int)timp_nivel);
+                                //RaiseTimerEvent(ProcessState.Filling,2000);
+                               
                             }
                             else
                             {
@@ -197,10 +233,15 @@ namespace SimulatorPS2I
                             Level2();
                             if (nivel_curent <= capacitate)
                             {
+                                if (valueOfP < 0)
+                                {
+                                    valueOfP *= (-1);
+                                }
                                 this.nivel_curent += this.prag2;
-                                timp_nivel = (float)((this.P1Value * this.debMaxP1 * this.prag2) / 1000);
+                                timp_nivel = (float)((this.valueOfP * this.debMaxP1 * this.prag2) / 1000);
                                 System.Threading.Thread.Sleep((int)timp_nivel);
-                                Console.WriteLine("timp nivel : " + (int)timp_nivel);
+                                //RaiseTimerEvent(ProcessState.Filling, (int)timp_nivel);
+                               
                             }
                             else
                             {
@@ -212,11 +253,15 @@ namespace SimulatorPS2I
                             Level3();
                             if (nivel_curent <= capacitate)
                             {
+                                if (valueOfP < 0)
+                                {
+                                    valueOfP *= (-1);
+                                }
                                 this.nivel_curent += this.prag3;
-                                timp_nivel = (float)((this.P1Value * this.debMaxP1 * this.prag3) / 1000);
+                                timp_nivel = (float)((this.valueOfP * this.debMaxP1 * this.prag3) / 1000);
                                 System.Threading.Thread.Sleep((int)timp_nivel);
-
-                                Console.WriteLine("timp nivel : " + (int)timp_nivel);
+                                //RaiseTimerEvent(ProcessState.Filling, (int)timp_nivel);
+                               
 
                             }
                             else
@@ -229,11 +274,15 @@ namespace SimulatorPS2I
                             Level4();
                             if (nivel_curent <= capacitate)
                             {
+                                if (valueOfP < 0)
+                                {
+                                    valueOfP *= (-1);
+                                }
                                 this.nivel_curent += this.prag4;
-                                timp_nivel = (float)((this.P1Value * this.debMaxP1 * this.prag4) / 1000);
+                                timp_nivel = (float)((this.valueOfP * this.debMaxP1 * this.prag4) / 1000);
                                 System.Threading.Thread.Sleep((int)timp_nivel);
-
-                                Console.WriteLine("timp nivel : " + (int)timp_nivel);
+                                //RaiseTimerEvent(ProcessState.Filling, (int)timp_nivel);
+                               
                             }
                             else
                             {
@@ -257,16 +306,24 @@ namespace SimulatorPS2I
 
                     }
                    
-                    Console.WriteLine("nivel curent : "+this.nivel_curent + " cap max : " + this.capacitate);
+                    //Console.WriteLine("nivel curent : "+this.nivel_curent + " cap max : " + this.capacitate);
                     if ( current_level != 6)
                     {
                         current_level++;
                         RaiseTimerEvent(ProcessState.Filling, 1000);
-                    }                    
-               
+                    }
+                    
                     break;
                 case ProcessState.Emptying:
-                    if(current_level == 6)
+                    if (this.P2Value == 0)
+                        this.P2Value = 1;
+                    if (this.P1Value == 0.1)
+                    {
+                        this.valueOfP = (float)this.P2Value;
+                    }
+                    Console.WriteLine("\nP1 : " + this.P1Value + " \nP2: " + this.P2Value);
+                    Console.WriteLine("\n suma : " + (P1Value - P2Value));
+                    if (current_level == 6)
                     {
                         current_level--;
                     }
@@ -276,8 +333,12 @@ namespace SimulatorPS2I
                             Level5();
                             if(nivel_curent >= 0)
                             {
+                                if (valueOfP < 0)
+                                {
+                                    valueOfP *= (-1);
+                                }
                                 nivel_curent -= this.prag5;
-                                timp_nivel = (float)((this.P2Value * this.debMaxP2 * this.prag5) / 1000);
+                                timp_nivel = (float)((this.valueOfP * this.debMaxP2 * this.prag5) / 1000);
                                 System.Threading.Thread.Sleep((int)timp_nivel);
                             }
                             else
@@ -290,8 +351,12 @@ namespace SimulatorPS2I
                             Level4();
                             if (nivel_curent >= 0)
                             {
+                                if (valueOfP < 0)
+                                {
+                                    valueOfP *= (-1);
+                                }
                                 nivel_curent -= this.prag4;
-                                timp_nivel = (float)((this.P2Value * this.debMaxP2 * this.prag4) / 1000);
+                                timp_nivel = (float)((this.valueOfP * this.debMaxP2 * this.prag4) / 1000);
                                 System.Threading.Thread.Sleep((int)timp_nivel);
                             }
                             else
@@ -305,8 +370,12 @@ namespace SimulatorPS2I
 
                             if (nivel_curent >= 0)
                             {
+                                if (valueOfP < 0)
+                                {
+                                    valueOfP *= (-1);
+                                }
                                 nivel_curent -= this.prag3;
-                                timp_nivel = (float)((this.P2Value * this.debMaxP2 * this.prag3) / 1000);
+                                timp_nivel = (float)((this.valueOfP * this.debMaxP2 * this.prag3) / 1000);
                                 System.Threading.Thread.Sleep((int)timp_nivel);
                             }
                             else
@@ -320,8 +389,12 @@ namespace SimulatorPS2I
                             Level2();
                             if (nivel_curent >= 0)
                             {
+                                if (valueOfP < 0)
+                                {
+                                    valueOfP *= (-1);
+                                }
                                 nivel_curent -= this.prag2;
-                                timp_nivel = (float)((this.P2Value * this.debMaxP2 * this.prag2) / 1000);
+                                timp_nivel = (float)((this.valueOfP * this.debMaxP2 * this.prag2) / 1000);
                                 System.Threading.Thread.Sleep((int)timp_nivel);
                             }
                             else
@@ -334,8 +407,12 @@ namespace SimulatorPS2I
                             Level1();
                             if (nivel_curent >= 0)
                             {
+                                if (valueOfP < 0)
+                                {
+                                    valueOfP *= (-1);
+                                }
                                 nivel_curent -= this.prag1;
-                                timp_nivel = (float)((this.P2Value * this.debMaxP2 * this.prag1) / 1000);
+                                timp_nivel = (float)((this.valueOfP * this.debMaxP2 * this.prag1) / 1000);
                                 System.Threading.Thread.Sleep((int)timp_nivel);
                             }
                             else
@@ -349,7 +426,7 @@ namespace SimulatorPS2I
                             RaiseTimerEvent(ProcessState.Off, 1000);
                             break;
                     }
-                    Console.WriteLine("nivel curent : " + this.nivel_curent + " cap max : " + this.capacitate);
+                    //Console.WriteLine("nivel curent : " + this.nivel_curent + " cap max : " + this.capacitate);
                     if (current_level != 0)
                     {
                         current_level--;
@@ -357,26 +434,41 @@ namespace SimulatorPS2I
                     }                             
                     break;
                 case ProcessState.BlinkOn:
-                    switch (current_level)
+                    if(this.P1Value < this.P2Value)
                     {
-                        case 5:
-                            Level5();
-                            break;
-                        case 4:
-                            Level4();
-                            break;
-                        case 3:
-                            Level3();
-                            break;
-                        case 2:
-                            Level2();
-                            break;
-                        case 1:
-                            Level1();
-                            break;
+                        valueOfP =(float)(P1Value - P2Value);
+                        Console.WriteLine("este umplereee");
+                        RaiseTimerEvent(ProcessState.Filling, 1000);
+                       
+                    }else if (this.P1Value > this.P2Value)
+                    {
+                        valueOfP = (float)(P2Value - P1Value);
+                        Console.WriteLine("este golireee");
+                        RaiseTimerEvent(ProcessState.Emptying, 1000);
                     }
-
-                    RaiseTimerEvent(ProcessState.BlinkOff, 1000);
+                    else
+                    {
+                        valueOfP = 1;
+                        switch (current_level)
+                        {
+                            case 5:
+                                Level5();
+                                break;
+                            case 4:
+                                Level4();
+                                break;
+                            case 3:
+                                Level3();
+                                break;
+                            case 2:
+                                Level2();
+                                break;
+                            case 1:
+                                Level1();
+                                break;
+                        }
+                        RaiseTimerEvent(ProcessState.BlinkOff, 1000);
+                    }                    
                     break;
 
                 case ProcessState.BlinkOff:
@@ -425,21 +517,7 @@ namespace SimulatorPS2I
 
         }
 
-        private void RaiseTimerEvent(ProcessState NextStateOfTheProcess, int TimeInterval)
-        {
-            if (!_setNextState)
-            {
-                _setNextState = true;
-                _nextstate = NextStateOfTheProcess;
-                _timer.Interval = TimeInterval;
-                _timer.Start();
-            }
-        }
-
-        public void ForceNextState(ProcessState NextState)
-        {
-            CurrentStateOfTheProcess = NextState;
-        } 
+       
         #endregion
 
         #region UI_updates
@@ -785,6 +863,7 @@ namespace SimulatorPS2I
 
         #endregion
 
+        #region Levels
         private void Level5()
         {
             IsB5 = true; IsLevel5 = true;
@@ -839,7 +918,8 @@ namespace SimulatorPS2I
             IsB3 = false; IsLevel3 = false;
             IsB2 = false; IsLevel2 = false;
             IsB1 = false; IsLevel1 = false;
-        }
+        } 
+        #endregion
 
     }
   
