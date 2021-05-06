@@ -200,7 +200,9 @@ namespace SimulatorPS2I
             this.prag3 = Int32.Parse(pragB3.Text);
             this.prag4 = Int32.Parse(pragB4.Text);
             this.prag5 = Int32.Parse(pragB5.Text);
-         
+            
+
+
                      
         }
 

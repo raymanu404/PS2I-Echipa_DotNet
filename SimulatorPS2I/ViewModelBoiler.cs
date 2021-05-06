@@ -33,7 +33,10 @@ namespace SimulatorPS2I
         private bool _setNextState = false;
         private bool _isSendingData = false;
         private BackgroundWorker _worker = new BackgroundWorker();
-
+        
+        //declarare Sender
+        
+        
         public float capacitate;
         public float debMaxP1;
         public float debMaxP2;

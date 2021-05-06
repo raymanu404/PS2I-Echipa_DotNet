@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1433
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS2IMVC", "PS2IMVC\PS2IMVC.csproj", "{E320A095-CB30-4BDD-85B2-92D0E001A3ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulatorPS2I", "SimulatorPS2I\SimulatorPS2I.csproj", "{DA69E539-F9F6-4ACC-B21C-D06095EE3267}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimulatorPS2", "SimulatorPS2", "{2E3248DF-176B-49E3-A560-0E67F41E98A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monitor", "Monitor\Monitor.csproj", "{4FA991C7-EC76-4F26-A661-68CDEA8A8D5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,17 @@ Global
 		{DA69E539-F9F6-4ACC-B21C-D06095EE3267}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA69E539-F9F6-4ACC-B21C-D06095EE3267}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA69E539-F9F6-4ACC-B21C-D06095EE3267}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA991C7-EC76-4F26-A661-68CDEA8A8D5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA991C7-EC76-4F26-A661-68CDEA8A8D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA991C7-EC76-4F26-A661-68CDEA8A8D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA991C7-EC76-4F26-A661-68CDEA8A8D5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DA69E539-F9F6-4ACC-B21C-D06095EE3267} = {2E3248DF-176B-49E3-A560-0E67F41E98A4}
+		{4FA991C7-EC76-4F26-A661-68CDEA8A8D5B} = {2E3248DF-176B-49E3-A560-0E67F41E98A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B83CBABE-75AD-46E2-AC81-9F5662C6B7A7}

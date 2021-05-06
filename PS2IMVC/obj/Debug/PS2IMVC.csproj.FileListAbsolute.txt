@@ -151,7 +151,6 @@ E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\PS2IMVC\bin\System.Web.WebPages.Razor.x
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\PS2IMVC\bin\Newtonsoft.Json.xml
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\PS2IMVC\bin\Antlr3.Runtime.pdb
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\PS2IMVC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\PS2IMVC\obj\Debug\PS2IMVC.csprojAssemblyReference.cache
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\PS2IMVC\obj\Debug\PS2IMVC.csproj.CoreCompileInputs.cache
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\PS2IMVC\obj\Debug\PS2IMVC.csproj.CopyComplete
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\PS2IMVC\obj\Debug\PS2IMVC.dll

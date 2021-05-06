@@ -1,0 +1,9 @@
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Comm\bin\Debug\netcoreapp2.0\Comm.deps.json
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Comm\bin\Debug\netcoreapp2.0\Comm.dll
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Comm\bin\Debug\netcoreapp2.0\Comm.pdb
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Comm\obj\Debug\netcoreapp2.0\Comm.AssemblyInfoInputs.cache
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Comm\obj\Debug\netcoreapp2.0\Comm.AssemblyInfo.cs
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Comm\obj\Debug\netcoreapp2.0\Comm.csproj.CoreCompileInputs.cache
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Comm\obj\Debug\netcoreapp2.0\Comm.dll
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Comm\obj\Debug\netcoreapp2.0\Comm.pdb
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Comm\obj\Debug\netcoreapp2.0\Comm.csprojAssemblyReference.cache
