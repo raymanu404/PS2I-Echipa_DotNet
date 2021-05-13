@@ -30,8 +30,6 @@ namespace PS2IMVC
             ParametriBoiler.PragB2 = 2000;
             ParametriBoiler.PragB3 = 3000;
             ParametriBoiler.PragB4 = 4000;
-            ParametriBoiler.PragB5 = 5000;
-
 
 
             AreaRegistration.RegisterAllAreas();
@@ -47,15 +45,50 @@ namespace PS2IMVC
         private void timer_10ms(Stopwatch stopwatch)
         {
             Task task = new Task(() => {
-                while(true)
+                decimal[] y = new decimal[] { 0, 0 };
+                int miliseconds = 0;
+                while (true)
                 {
-                    Debug.WriteLine(stopwatch.ElapsedTicks*1000/Stopwatch.Frequency);
-                    if (stopwatch.ElapsedTicks * 1000 / Stopwatch.Frequency >= 1000)
+                    if (stopwatch.ElapsedTicks * 1000 / Stopwatch.Frequency >= 100)
                     {
                         stopwatch.Stop();
                         stopwatch.Reset();
-                        Debug.WriteLine("1 second passed");
                         stopwatch.Start();
+                        if (ParametriBoiler.SystemEnable == true)
+                        {
+                            if (ParametriBoiler.PompaG1 == true && ParametriBoiler.ValvaK1 == false)
+                            {
+                                if (ParametriBoiler.NivelCurent < ParametriBoiler.Capacitate)
+                                {
+                                    y[1] = Convert.ToDecimal(0.1) * ParametriBoiler.DebitMaxP1 * ParametriBoiler.P1 / 100 + y[0];
+                                    y[0] = y[1];
+                                }
+                                else
+                                {
+                                    ParametriBoiler.PompaG1 = false;
+                                }
+                            }
+                            else if (ParametriBoiler.PompaG1 == true && ParametriBoiler.ValvaK1 == true)
+                            {
+                                if (ParametriBoiler.NivelCurent < ParametriBoiler.Capacitate && ParametriBoiler.NivelCurent > 0)
+                                {
+                                    y[1] = Convert.ToDecimal(0.1) * (ParametriBoiler.DebitMaxP1 * ParametriBoiler.P1 / 100 - ParametriBoiler.DebitMaxP2 * ParametriBoiler.P2 / 100) + y[0];
+                                    y[0] = y[1];
+                                }
+                                else
+                                {
+                                    ParametriBoiler.PompaG1 = false;
+                                    ParametriBoiler.ValvaK1 = false;
+                                }
+                            }
+                        }
+                        ParametriBoiler.NivelCurent = y[1];
+                        miliseconds += 100;
+                        if (miliseconds == 1000)
+                        {
+                            Debug.WriteLine(y[1]);
+                            miliseconds = 0;
+                        }
                     }
                 }
 

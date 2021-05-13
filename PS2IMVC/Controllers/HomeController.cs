@@ -32,12 +32,27 @@ namespace PS2IMVC.Controllers
             else if(form["P1_change"] != null)
             {
                 ParametriBoiler.P1 = Convert.ToInt32(form["P1_change"]);
-                //Debug.WriteLine(ParametriBoiler.P1);
             }
-            else if (form["P2_change"].ToString() != null)
+            else if (form["P2_change"] != null)
             {
                 ParametriBoiler.P2 = Convert.ToInt32(form["P2_change"]);
-                //Debug.WriteLine(ParametriBoiler.P2);
+            }
+            else if(form["S5_Button"] != null)
+            {
+                if (ParametriBoiler.SystemEnable == true && ParametriBoiler.PompaG1 == false && ParametriBoiler.ValvaK1 == false)
+                    ParametriBoiler.PompaG1 = true;
+            }
+            else if (form["S0_Button"] != null)
+            {
+                if (ParametriBoiler.SystemEnable == true && ParametriBoiler.PompaG1 == false && ParametriBoiler.ValvaK1 == false)
+                {
+                    ParametriBoiler.PompaG1 = true;
+                    ParametriBoiler.ValvaK1 = true;
+                }
+            }
+            else if(form["Refresh"] != null)
+            {
+                return Json(new { Message = Convert.ToByte(ParametriBoiler.NivelCurent*51/ParametriBoiler.Capacitate), JsonRequestBehavior.AllowGet });
             }
             return Json( new { Message = "success", JsonRequestBehavior.AllowGet } );
         }

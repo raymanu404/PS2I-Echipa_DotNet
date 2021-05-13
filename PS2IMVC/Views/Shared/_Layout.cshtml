@@ -17,53 +17,46 @@
         }
     </style>
 </head>
-<body style="width: 100%; height: 100%; padding: 0; margin: 0;"> @*onload="Refresh()">*@
-    @*<div style="height: 10%; width: 100%; background-color: red;">
-        <ul style="display: inline;">
-            <li>
-                @Html.ActionLink("ParametriBoiler", "Index", "ParametriBoiler")
-            </li>
-        </ul>
-    </div>*@
+<body style="width: 100%; height: 100%; padding: 0; margin: 0;" onload="Refresh()">
     <div style="height: 100%; width: 100%; position: relative;">
         <div style="width: calc(25% - 5px); position: absolute; height: calc(45% - 5px); top: 5px; right: 5px; border: 5px solid black; border-radius: 25px;">
             <div style="position: relative; width: 100%; height: 16.66%;">
 
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S0</p>
-                <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
+                <div id="S0_Button" class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
                 <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Empty</p>
             </div>
             <div style="position: relative; width: 100%; height: 16.66%;">
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H1</p>
-                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; cursor: pointer;"></div>
+                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S1</p>
                 <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
                 <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 1</p>
             </div>
             <div style="position: relative; width: 100%; height: 16.66%;">
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H2</p>
-                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; cursor: pointer;"></div>
+                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S2</p>
                 <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
                 <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 2</p>
             </div>
             <div style="position: relative; width: 100%; height: 16.66%;">
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H3</p>
-                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; cursor: pointer;"></div>
+                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S3</p>
                 <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
                 <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 3</p>
             </div>
             <div style="position: relative; width: 100%; height: 16.66%;">
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H4</p>
-                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; cursor: pointer;"></div>
+                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S4</p>
                 <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
                 <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 4</p>
             </div>
             <div style="position: relative; width: 100%; height: 16.66%;">
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S5</p>
-                <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
+                <div id="S5_Button" class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;  cursor: pointer;"></div>
                 <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Full</p>
             </div>
         </div>
@@ -160,7 +153,7 @@
                 <tr>
                     @for (int j = 0; j < 10; j++)
                     {
-                        if (j >= 3 && j <= 6 && i >= 23 && i <= 79)
+                        if (j >= 3 && j <= 6 && i >= 22 && i <= 79)
                         {
                             if (j == 3)
                             {
@@ -226,14 +219,29 @@
                 rounds.eq(j).css('width', rounds.eq(j).outerHeight() + 'px');
         });
 
-
-        var i = 79;
         function Refresh() {
-            $('td[data-i=' + i + '][data-j=' + 6 + '], td[data-i=' + i + '][data-j=' + 5 + '], td[data-i=' + i + '][data-j=' + 4 + '], td[data-i=' + i + '][data-j=' + 3 + ']').css('background-color', 'rgba(0, 0, 0, 0.5)');
-            i--;
-            if(i >= 23)
-                setTimeout(Refresh, 100);
+            $.ajax({
+                type: 'POST',
+                data: { 'Refresh': "" },
+                url: '/',
+                success(data) {
+                    console.log(data, data["Message"]);
+                    for (i = 0; i < data["Message"]; i++)
+                        for (j = 3; j <= 6; j++)
+                            $('tr').eq(72 - i).find('td').eq(j).css('background-color', 'rgba(0, 0, 0, 0.5)')
+                }
+
+            });
+            setTimeout(Refresh, 1000);
         }
+
+        //var i = 79;
+        //function Refresh() {
+        //    $('td[data-i=' + i + '][data-j=' + 6 + '], td[data-i=' + i + '][data-j=' + 5 + '], td[data-i=' + i + '][data-j=' + 4 + '], td[data-i=' + i + '][data-j=' + 3 + ']').css('background-color', 'rgba(0, 0, 0, 0.5)');
+        //    i--;
+        //    if(i >= 23)
+        //        setTimeout(Refresh, 100);
+        //}
 
         var P1 = false
         var P2 = false
@@ -360,13 +368,27 @@
                 type: 'POST',
                 data: { 'button_enable': parent.data('enabled') },
                 url: '/',
-                success(data) {
-                    console.log(data);
-                }
 
-            })
-            //console.log($(this).parents('div').data('enabled'));
-        })
+            });
+        });
+
+        $('#S5_Button').on('click', function () {
+            $.ajax({
+                type: 'POST',
+                data: { 'S5_Button': "" },
+                url: '/',
+
+            });
+        });
+
+        $('#S0_Button').on('click', function () {
+            $.ajax({
+                type: 'POST',
+                data: { 'S0_Button': "" },
+                url: '/',
+
+            });
+        });
 
     </script>
 

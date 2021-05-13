@@ -27,6 +27,5 @@ namespace PS2IMVC.Models
         public static int PragB2 { get; set; }
         public static int PragB3 { get; set; }
         public static int PragB4 { get; set; }
-        public static int PragB5 { get; set; }
     }
 }
