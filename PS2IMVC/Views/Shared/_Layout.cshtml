@@ -68,6 +68,8 @@
             </div>
         </div>
         <p style="position: absolute; top: 50%; right: 0; margin: 0;">S11</p>
+        <p style="position: absolute; top: 45%; right: 6.5%; margin: 0;">Off</p>
+        <p style="position: absolute; top: 50%; right: 6.5%; margin: 0;">On</p>
         <div class="round_height" data-enabled="false" style="position: absolute; height: 10%; top: 45%; right: 2.5%;">
             <div class="button_enable" style="position: absolute; width: 50%; z-index: 1; height: 50%; cursor: pointer; border: 1px solid black; border-radius: 50%; left: 25%; right: 25%; top: 25%; bottom: 25%;">
                 <div style="position: absolute; width: 50%; height: 50%; border: 1px solid black; border-radius: 50%; margin-left: 25%; margin-right: 25%; margin-top: 25%; margin-bottom: 25%;">
@@ -111,7 +113,7 @@
                     </svg>
                     <div class="round" style="position: absolute; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; left: 25%; z-index: 1; right: 25%; width: 50%; border: 7.5px double black; border-radius: 50%; cursor: pointer;">
                         <svg style="width: 100%; height: 100%; border-radius: 50%;">
-                            <line id="P1" x1="50%" y1="50%" x2="0%" y2="100%" stroke="black" stroke-width="0.35vw" />
+                            <line id="P1" x1="50%" data-value="0" y1="50%" x2="0%" y2="100%" stroke="black" stroke-width="0.35vw" />
                         </svg>
                     </div>
                 </div>
@@ -144,7 +146,7 @@
                     </svg>
                     <div class="round" style="position: absolute; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; left: 25%; z-index: 1; right: 25%; width: 50%; border: 7.5px double black; border-radius: 50%; cursor: pointer;">
                         <svg style="width: 100%; height: 100%; border-radius: 50%;">
-                            <line id="P2" x1="50%" y1="50%" x2="0%" y2="100%" stroke="black" stroke-width="0.35vw" />
+                            <line id="P2" x1="50%" y1="50%" x2="0%" y2="100%" data-value="0" stroke="black" stroke-width="0.35vw" />
                         </svg>
                     </div>
                 </div>
@@ -262,39 +264,74 @@
                 {
                     var x2 = $('#P1').attr('x2');
                     var y2 = $('#P1').attr('y2');
+                    var value = $('#P1').data('value');
                 }
                 else if (P2 == true)
                 {
                     var x2 = $('#P2').attr('x2');
                     var y2 = $('#P2').attr('y2');
+                    var value = $('#P2').data('value');
                 }
                 x2 = x2.substring(0, x2.lastIndexOf('%'));
                 y2 = y2.substring(0, y2.lastIndexOf('%'));
                 if (e.clientX - lastX > 0)
                 {
                     if (+y2 == 0 && x2 < 100)
+                    {
                         x2 = +x2 + 50;
+                        value = +value + 10;
+                    }
                 }
                 else if (e.clientX - lastX < 0)
                     if (+y2 == 0 && x2 > 0)
+                    {
                         x2 = +x2 - 50;
+                        value = +value - 10;
+                    }
+                        
                 if (e.clientY - lastY > 0) {
-                    if (+x2 != 50 && +y2 < 100)
+                    if (+x2 != 50 && +y2 < 100) {
                         y2 = +y2 + 25;
+                        if (+x2 == 0)
+                            value = +value - 10;
+                        else if (+x2 == 100)
+                            value = +value + 10;
+                    }
                 }
                 else if (e.clientY - lastY < 0)
                     if (+x2 != 50 && +y2 > 0)
+                    {
                         y2 = +y2 - 25;
+                        if (+x2 == 0)
+                            value = +value + 10;
+                        else if (+x2 == 100)
+                            value = +value - 10;
+                    }
 
                 if (P1 == true)
                 {
                     $('#P1').attr('x2', x2 + '%');
                     $('#P1').attr('y2', y2 + '%');
+                    $('#P1').data('value', value);
+                    $.ajax({
+                        type: 'POST',
+                        data: { 'P1_change': value },
+                        url: '/',
+                    });
                 }
                 else if (P2 == true)
                 {
                     $('#P2').attr('x2', x2 + '%');
                     $('#P2').attr('y2', y2 + '%');
+                    $('#P2').data('value', value);
+                    $.ajax({
+                        type: 'POST',
+                        data: { 'P2_change': value },
+                        url: '/',
+                        success(data) {
+                            console.log(data);
+                        }
+                    });
                 }
 
                 lastX = e.clientX;
@@ -319,6 +356,15 @@
                 parent.find('svg').eq(1).css('top', '0').find('circle').attr('cy', '100%');
                 parent.data('enabled', false);
             }
+            $.ajax({
+                type: 'POST',
+                data: { 'button_enable': parent.data('enabled') },
+                url: '/',
+                success(data) {
+                    console.log(data);
+                }
+
+            })
             //console.log($(this).parents('div').data('enabled'));
         })
 
