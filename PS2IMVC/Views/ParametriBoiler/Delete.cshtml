@@ -1,0 +1,136 @@
+﻿@model PS2IMVC.Models.ParametriBoiler
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ParametriBoiler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SystemEnable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SystemEnable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PompaG1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PompaG1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValvaK1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValvaK1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.P1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.P1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.P2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.P2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacitate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacitate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DebitMaxP1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DebitMaxP1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DebitMaxP2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DebitMaxP2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NivelCurent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NivelCurent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PragB1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PragB1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PragB2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PragB2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PragB3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PragB3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PragB4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PragB4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PragB5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PragB5)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

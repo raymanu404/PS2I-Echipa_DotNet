@@ -1,0 +1,111 @@
+﻿@model IEnumerable<PS2IMVC.Models.ParametriBoiler>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SystemEnable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PompaG1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValvaK1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.P1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.P2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capacitate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DebitMaxP1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DebitMaxP2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NivelCurent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PragB1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PragB2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PragB3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PragB4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PragB5)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SystemEnable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PompaG1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValvaK1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.P1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.P2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Capacitate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DebitMaxP1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DebitMaxP2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NivelCurent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PragB1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PragB2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PragB3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PragB4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PragB5)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
