@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ei3S949qKRn0S3in4r+6/cxdAsmQk+5UPDDZZbwnq9CsLcjjw/BK4RZpZB2mmZICBwqqthEUNLd93qUnX+wp0w==",
+  "dgSpecHash": "mVoszFHqyuVp3y3hKARO51xR1V84CMo9M21/VhpB9O6kkdKC42OdRdUWFH3jjnN535sCePa4k1APBpxz1sdwuQ==",
   "success": true,
   "projectFilePath": "E:\\Anul 3\\SEM II\\PS2I\\PS2I-Echipa_DotNet\\Monitor\\Monitor.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

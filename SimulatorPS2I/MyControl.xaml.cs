@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Net.Sockets;
+using System.Diagnostics;
 
 namespace SimulatorPS2I
 {
@@ -187,10 +189,11 @@ namespace SimulatorPS2I
                                                         // sunt egale (P1 == P2 ) atunci vom avea mentinere
 
         }
-        private void Button_Submit(object sender, RoutedEventArgs e)
+        private async void Button_Submit(object sender, RoutedEventArgs e)
         {
             this.GetParametersLabel.Content = "";
             //in aceasta metoda vom trimite datele prin intermediul unui tcp catre un server
+
             this.cap = float.Parse(capacitate.Text);
             this.debMaxP1 = float.Parse(debitMaxP1.Text);
             this.debMaxP2 = float.Parse(debitMaxP2.Text);
@@ -200,10 +203,24 @@ namespace SimulatorPS2I
             this.prag3 = Int32.Parse(pragB3.Text);
             this.prag4 = Int32.Parse(pragB4.Text);
             this.prag5 = Int32.Parse(pragB5.Text);
-            
 
 
-                     
+            String concate = capacitate.Text + "/" + debitMaxP1.Text + "/" + debitMaxP2.Text + "/" + nivelCurent.Text + "/" + pragB1.Text + "/" + pragB2.Text + "/" + pragB3.Text + "/" + pragB4.Text + "/" + pragB5.Text +"\0";
+
+            //TcpClient client = new TcpClient("34.107.39.219",8080);
+            //client.GetStream().Write(Encoding.ASCII.GetBytes(concate),0,concate.Length);
+            //byte[] message = new byte[1];
+            //await client.GetStream().ReadAsync(message,0,message.Length);
+
+            //client.Dispose();
+            //if(message[0] == 1)
+            //{
+            //    this.DataReceived.Content = "S-au trimis cu succes!";
+            //}
+            //else{
+            //    this.DataReceived.Content = "";
+            //}
+
         }
 
         #region ValidareFormular
@@ -416,7 +433,8 @@ namespace SimulatorPS2I
                     v[i] == '6' ||
                     v[i] == '7' ||
                     v[i] == '8' ||
-                    v[i] == '9')
+                    v[i] == '9' ||
+                    v[i] == '.')
                     nr++;
             }
             if (nr == v.Length)

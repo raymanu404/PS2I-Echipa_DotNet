@@ -1,6 +1,8 @@
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\bin\Debug\SimulatorPS2I.exe.config
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\bin\Debug\SimulatorPS2I.exe
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\bin\Debug\SimulatorPS2I.pdb
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\bin\Debug\Comm.dll
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\bin\Debug\Comm.pdb
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\obj\Debug\SimulatorPS2I.csprojAssemblyReference.cache
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\obj\Debug\MainWindow.g.cs
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\obj\Debug\MyControl.g.cs
@@ -14,5 +16,6 @@ E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\obj\Debug\SimulatorPS2I.g
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\obj\Debug\SimulatorPS2I.Properties.Resources.resources
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\obj\Debug\SimulatorPS2I.csproj.GenerateResource.cache
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\obj\Debug\SimulatorPS2I.csproj.CoreCompileInputs.cache
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\obj\Debug\SimulatorPS2I.csproj.CopyComplete
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\obj\Debug\SimulatorPS2I.exe
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\SimulatorPS2I\obj\Debug\SimulatorPS2I.pdb

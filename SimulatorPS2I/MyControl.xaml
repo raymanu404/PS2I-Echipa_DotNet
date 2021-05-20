@@ -199,5 +199,6 @@
         <Label Content="Legenda  " HorizontalAlignment="Left" Height="30" Margin="1050,25,0,0" VerticalAlignment="Top" Width="60"/>
         <Label Content="P1- Potentiometru pentru umplere" HorizontalAlignment="Left" Height="30" Margin="1050,55,0,0" VerticalAlignment="Top" Width="225"/>
         <Label Content="P2- Potentiometru pentru golire" HorizontalAlignment="Left" Height="30" Margin="1050,85,0,0" VerticalAlignment="Top" Width="225"/>
+        <Label Name="DataReceived" HorizontalAlignment="Left" Margin="615,125,0,0" VerticalAlignment="Top" Height="35" Width="200" FontSize="16" Foreground="LightGreen" FontWeight="SemiBold"/>
     </Grid>
 </UserControl>

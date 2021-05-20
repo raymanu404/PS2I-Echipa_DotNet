@@ -5,7 +5,6 @@ E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\bin\Debug\net5.0\Monitor.runtim
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\bin\Debug\net5.0\Monitor.dll
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\bin\Debug\net5.0\ref\Monitor.dll
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\bin\Debug\net5.0\Monitor.pdb
-E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\obj\Debug\net5.0\Monitor.csprojAssemblyReference.cache
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\obj\Debug\net5.0\Monitor.GeneratedMSBuildEditorConfig.editorconfig
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\obj\Debug\net5.0\Monitor.AssemblyInfoInputs.cache
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\obj\Debug\net5.0\Monitor.AssemblyInfo.cs
@@ -16,4 +15,5 @@ E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\obj\Debug\net5.0\Monitor.pdb
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\obj\Debug\net5.0\Monitor.genruntimeconfig.cache
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\bin\Debug\net5.0\Comm.dll
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\bin\Debug\net5.0\Comm.pdb
+E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\obj\Debug\net5.0\Monitor.csprojAssemblyReference.cache
 E:\Anul 3\SEM II\PS2I\PS2I-Echipa_DotNet\Monitor\obj\Debug\net5.0\Monitor.csproj.CopyComplete

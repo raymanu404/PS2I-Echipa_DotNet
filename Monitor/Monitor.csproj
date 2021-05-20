@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <ProjectReference Include="..\Comm\Comm.csproj" />
   </ItemGroup>
 
 </Project>

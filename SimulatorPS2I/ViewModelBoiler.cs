@@ -31,9 +31,9 @@ namespace SimulatorPS2I
         private System.Timers.Timer _timer = new System.Timers.Timer();
         private ProcessState _nextstate;
         private bool _setNextState = false;
-        private bool _isSendingData = false;
+        private bool _isSendingData = true;
         private BackgroundWorker _worker = new BackgroundWorker();
-        
+        private Comm.Sender _sender;
         //declarare Sender
         
         
@@ -55,7 +55,7 @@ namespace SimulatorPS2I
         {
             if (_isSendingData)
             {
-                //_sender = new Comm.Sender("127.0.0.1", 3000);
+                _sender = new Comm.Sender("127.0.0.1", 3000);
             }
             getParameters = false;
             current_level = 0;
@@ -86,7 +86,17 @@ namespace SimulatorPS2I
         {
             if (_isSendingData)
             {
-                //_sender.Send(Convert.ToByte(_currentStateOfTheProcess));
+
+               
+                if(this.current_level == 6)
+                {
+                    _sender.Send(Convert.ToByte(4));
+                }
+                else if(this.current_level == 0)
+                {
+                    _sender.Send(Convert.ToByte(5));
+                }
+                _sender.Send(Convert.ToByte(_currentStateOfTheProcess));
             }
             
         }
@@ -106,7 +116,9 @@ namespace SimulatorPS2I
                 _nextstate = NextStateOfTheProcess;
                 _timer.Interval = TimeInterval;
                 _timer.Start();
+
             }
+            Console.WriteLine("nivel current " + this.current_level);
         }
 
         public void ForceNextState(ProcessState NextState)
@@ -188,8 +200,8 @@ namespace SimulatorPS2I
                     {
                         this.valueOfP = (float)this.P1Value;
                     }
-                    Console.WriteLine("P1 : " + this.P1Value + " \nP2: " + this.P2Value);
-                    Console.WriteLine("suma : " + (valueOfP) );
+                    //Console.WriteLine("P1 : " + this.P1Value + " \nP2: " + this.P2Value);
+                    //Console.WriteLine("suma : " + (valueOfP) );
                     switch (current_level)
                     {
                         case 0:
@@ -324,8 +336,8 @@ namespace SimulatorPS2I
                     {
                         this.valueOfP = (float)this.P2Value;
                     }
-                    Console.WriteLine("\nP1 : " + this.P1Value + " \nP2: " + this.P2Value);
-                    Console.WriteLine("\n suma : " + (P1Value - P2Value));
+                    //Console.WriteLine("\nP1 : " + this.P1Value + " \nP2: " + this.P2Value);
+                    //Console.WriteLine("\n suma : " + (P1Value - P2Value));
                     if (current_level == 6)
                     {
                         current_level--;
