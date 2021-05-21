@@ -23,9 +23,9 @@ namespace PS2IMVC.Models
         public static decimal DebitMaxP2 { get; set; }
         [RegularExpression(@"^[0-9]*(\.[0-9]{1,2})?$")]
         public static decimal NivelCurent { get; set; }
-        public static int PragB1 { get; set; }
-        public static int PragB2 { get; set; }
-        public static int PragB3 { get; set; }
-        public static int PragB4 { get; set; }
+        public static decimal PragB1 { get; set; }
+        public static decimal PragB2 { get; set; }
+        public static decimal PragB3 { get; set; }
+        public static decimal PragB4 { get; set; }
     }
 }

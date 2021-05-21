@@ -12,6 +12,10 @@ namespace PS2IMVC.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.PragB1 = Convert.ToInt32(ParametriBoiler.PragB1 * 54 / ParametriBoiler.Capacitate);
+            ViewBag.PragB2 = Convert.ToInt32(ParametriBoiler.PragB2 * 54 / ParametriBoiler.Capacitate);
+            ViewBag.PragB3 = Convert.ToInt32(ParametriBoiler.PragB3 * 54 / ParametriBoiler.Capacitate);
+            ViewBag.PragB4 = Convert.ToInt32(ParametriBoiler.PragB4 * 54 / ParametriBoiler.Capacitate);
             return View();
         }
 
@@ -52,7 +56,23 @@ namespace PS2IMVC.Controllers
             }
             else if(form["Refresh"] != null)
             {
-                return Json(new { Message = Convert.ToByte(ParametriBoiler.NivelCurent*51/ParametriBoiler.Capacitate), JsonRequestBehavior.AllowGet });
+                bool stateS0 = false, stateS5 = false;
+                if (ParametriBoiler.PompaG1 == true && ParametriBoiler.ValvaK1 == false)
+                {
+                    stateS0 = false;
+                    stateS5 = true;
+                }
+                else if(ParametriBoiler.PompaG1 == true && ParametriBoiler.ValvaK1 == true)
+                {
+                    stateS0 = true;
+                    stateS5 = false;
+                }
+                else if(ParametriBoiler.PompaG1 == false && ParametriBoiler.ValvaK1 == false)
+                {
+                    stateS0 = false;
+                    stateS5 = false;
+                }
+                return Json(new { Nivel = Convert.ToByte(ParametriBoiler.NivelCurent*55/ParametriBoiler.Capacitate), PragB1 = Convert.ToInt32(ParametriBoiler.PragB1 * 54 / ParametriBoiler.Capacitate), PragB2 = Convert.ToInt32(ParametriBoiler.PragB2 * 54 / ParametriBoiler.Capacitate), PragB3 = Convert.ToInt32(ParametriBoiler.PragB3 * 54 / ParametriBoiler.Capacitate), PragB4 = Convert.ToInt32(ParametriBoiler.PragB4 * 54 / ParametriBoiler.Capacitate), StateS0 = stateS0, StateS5 = stateS5});
             }
             return Json( new { Message = "success", JsonRequestBehavior.AllowGet } );
         }

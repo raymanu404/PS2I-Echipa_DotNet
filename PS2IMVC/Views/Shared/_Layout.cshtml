@@ -15,6 +15,9 @@
         p {
             font-size: 1.75vw;
         }
+        td{
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body style="width: 100%; height: 100%; padding: 0; margin: 0;" onload="Refresh()">
@@ -23,33 +26,33 @@
             <div style="position: relative; width: 100%; height: 16.66%;">
 
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S0</p>
-                <div id="S0_Button" class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
+                <div id="S0_Button" class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey; cursor: pointer;"></div>
                 <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Empty</p>
             </div>
             <div style="position: relative; width: 100%; height: 16.66%;">
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H1</p>
-                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
+                <div id="B1_Led" class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S1</p>
                 <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
                 <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 1</p>
             </div>
             <div style="position: relative; width: 100%; height: 16.66%;">
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H2</p>
-                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
+                <div id="B2_Led" class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S2</p>
                 <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
                 <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 2</p>
             </div>
             <div style="position: relative; width: 100%; height: 16.66%;">
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H3</p>
-                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
+                <div id="B3_Led" class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S3</p>
                 <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
                 <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 3</p>
             </div>
             <div style="position: relative; width: 100%; height: 16.66%;">
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 5%; margin: 0;">H4</p>
-                <div class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
+                <div id="B4_Led" class="round" style="position: absolute; width: 5%; left: 16.5%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%;"></div>
                 <p style="position: absolute; width: 10%; height: 50%; top: 25%; bottom: 25%; left: 25%; margin: 0;">S4</p>
                 <div class="round" style="position: absolute; width: 10%; left: 37%; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; background-color: black; border-radius: 50%; border: 2px solid grey;"></div>
                 <p style="position: absolute; width: 50%; height: 50%; top: 25%; bottom: 25%; left: 50%; margin: 0;">Level 4</p>
@@ -150,42 +153,66 @@
         <table style="width: 50%; margin-left: 25%; margin-right: 25%; height: 100%; position: relative;">
             @for (int i = 0; i < 100; i++)
             {
-                <tr>
-                    @for (int j = 0; j < 10; j++)
+            <tr>
+                @for (int j = 0; j < 10; j++)
+                {
+                    if (j >= 3 && j <= 6 && i >= 22 && i <= 79)
                     {
-                        if (j >= 3 && j <= 6 && i >= 22 && i <= 79)
+                        if (j == 3)
                         {
-                            if (j == 3)
-                            {
-                                <td data-i="@i" data-j="@j" style="width: 4%;"></td>
-                            }
-                            else if (j == 6)
-                            {
-                                <td data-i="@i" data-j="@j" style="width: 0.5%;"></td>
-                            }
-                            else
-                            {
-                                <td data-i="@i" data-j="@j"></td>
-                            }
+                            <td data-i="@i" data-j="@j" style="width: 4%;"></td>
+                        }
+                        else if (j == 6)
+                        {
+                            <td data-i="@i" data-j="@j" style="width: 0.5%;"></td>
                         }
                         else
                         {
-                            if (j == 3)
-                            {
-                                <td style="width: 4%;"></td>
-                            }
-                            else if (j == 6)
-                            {
-                                <td style="width: 0.5%;"></td>
-                            }
-                            else
-                            {
-                                <td></td>
-                            }
+                            <td data-i="@i" data-j="@j"></td>
+                        }
+                    }
+                    else if (i >= 21 && i <= 72 && j == 7)
+                    {
+                        if (76 - i == ViewBag.PragB1)
+                        {
+                            <td class="PragB1" data-prag="@ViewBag.PragB1" style="position: relative; background-color: red;"><img src="~/Static/SensorB1.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
+                        }
+                        else if (76 - i == ViewBag.PragB2)
+                        {
+                            <td class="PragB2" data-prag="@ViewBag.PragB2" style="position: relative; background-color: red;"><img src="~/Static/SensorB2.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
+                        }
+                        else if (76 - i == ViewBag.PragB3)
+                        {
+                            <td class="PragB3" data-prag="@ViewBag.PragB3" style="position: relative; background-color: red;"><img src="~/Static/SensorB3.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
+                        }
+                        else if (76 - i == ViewBag.PragB4)
+                        {
+                            <td class="PragB4" data-prag="@ViewBag.PragB4" style="position: relative; background-color: red;"><img src="~/Static/SensorB4.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
+                        }
+                        else
+                        {
+                            <td></td>
                         }
 
                     }
-                </tr>
+                    else
+                    {
+                        if (j == 3)
+                        {
+                            <td style="width: 4%;"></td>
+                        }
+                        else if (j == 6)
+                        {
+                            <td style="width: 0.5%;"></td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    }
+
+                }
+            </tr>
             }
         </table>
     </div>
@@ -225,10 +252,53 @@
                 data: { 'Refresh': "" },
                 url: '/',
                 success(data) {
-                    console.log(data, data["Message"]);
-                    for (i = 0; i < data["Message"]; i++)
+                    //console.log(data, data["Message"]);
+                    var i, j;
+                    console.log(data);
+                    if (data["StateS0"] == true)
+                        $('#S0_Button').css('background-color', 'red');
+                    else
+                        $('#S0_Button').css('background-color', 'black');
+                    if (data["StateS5"] == true)
+                        $('#S5_Button').css('background-color', 'red');
+                    else
+                        $('#S5_Button').css('background-color', 'black');
+                    for (i = 1; i <= 4; i++)
+                        if ($('.PragB' + i).data('prag') != data["PragB" + i]) {
+                            $('.PragB' + i).removeClass('.PragB' + i).html('');
+                            $('tr').eq(76 - data["PragB" + i]).addClass("PragB" + i).data('prag', data["PragB" + i]).find('td').eq(7).html("<img src='~/Static/SensorB" + i + ".png' style='width: auto; height: 1000 %; position: absolute; top: -450 %;' />");
+                        }
+
+                    for (i = 0; i < data["Nivel"]; i++) {
+                        var td = $('tr').eq(76 - i).find('td').eq(7);
+                        if (td.hasClass('PragB1'))
+                            $('#B1_Led').css('background-color', 'green');
+                        else if (td.hasClass('PragB2'))
+                            $('#B2_Led').css('background-color', 'green');
+                        else if (td.hasClass('PragB3'))
+                            $('#B3_Led').css('background-color', 'green');
+                        else if (td.hasClass('PragB4'))
+                            $('#B4_Led').css('background-color', 'green');
                         for (j = 3; j <= 6; j++)
-                            $('tr').eq(72 - i).find('td').eq(j).css('background-color', 'rgba(0, 0, 0, 0.5)')
+                            $('tr').eq(76 - i).addClass("filled").find('td').eq(j).css('background-color', 'rgba(0, 0, 0, 0.5)');
+                    }
+                    var item_above = $('tr').eq(76 - i);
+                    var td = item_above.find('td').eq(7);
+                    if (item_above.hasClass("filled")) {
+                        item_above.removeClass("filled");
+                        for (j = 3; j <= 6; j++)
+                            item_above.find('td').eq(j).css('background-color', '');
+                        if (td.hasClass("PragB1"))
+                            $('#B1_Led').css('background-color', 'black');
+                        else if (td.hasClass('PragB2'))
+                            $('#B2_Led').css('background-color', 'black');
+                        else if (td.hasClass('PragB3'))
+                            $('#B3_Led').css('background-color', 'black');
+                        else if (td.hasClass('PragB4'))
+                            $('#B4_Led').css('background-color', 'black');
+
+                    }
+
                 }
 
             });
@@ -373,6 +443,8 @@
         });
 
         $('#S5_Button').on('click', function () {
+            if ($('#S0_Button').css('background-color') == "rgb(0, 0, 0)" && $('.button_enable').parents('div').data('enabled') == true)
+                $(this).css('background-color', 'red');
             $.ajax({
                 type: 'POST',
                 data: { 'S5_Button': "" },
@@ -382,6 +454,9 @@
         });
 
         $('#S0_Button').on('click', function () {
+            console.log($(this).css('background-color'));
+            if ($('#S5_Button').css('background-color') == "rgb(0, 0, 0)" && $('.button_enable').parents('div').data('enabled') == true)
+                $(this).css('background-color', 'red');
             $.ajax({
                 type: 'POST',
                 data: { 'S0_Button': "" },

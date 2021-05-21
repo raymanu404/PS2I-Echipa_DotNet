@@ -155,7 +155,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Static\Boiler.png" />
+    <Content Include="Static\SensorB1.png" />
+    <Content Include="Static\SensorB2.png" />
+    <Content Include="Static\SensorB3.png" />
+    <Content Include="Static\SensorB4.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

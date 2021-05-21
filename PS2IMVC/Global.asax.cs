@@ -29,7 +29,7 @@ namespace PS2IMVC
             ParametriBoiler.PragB1 = 1000;
             ParametriBoiler.PragB2 = 2000;
             ParametriBoiler.PragB3 = 3000;
-            ParametriBoiler.PragB4 = 4000;
+            ParametriBoiler.PragB4 = 10000;
 
 
             AreaRegistration.RegisterAllAreas();
@@ -70,18 +70,23 @@ namespace PS2IMVC
                             }
                             else if (ParametriBoiler.PompaG1 == true && ParametriBoiler.ValvaK1 == true)
                             {
-                                if (ParametriBoiler.NivelCurent < ParametriBoiler.Capacitate && ParametriBoiler.NivelCurent > 0)
+                                if (((ParametriBoiler.NivelCurent < ParametriBoiler.Capacitate) || (ParametriBoiler.NivelCurent >= ParametriBoiler.Capacitate && ParametriBoiler.DebitMaxP1 * ParametriBoiler.P1 < ParametriBoiler.DebitMaxP2 * ParametriBoiler.P2)) && ((ParametriBoiler.NivelCurent > ParametriBoiler.PragB1) || (ParametriBoiler.NivelCurent <= ParametriBoiler.PragB1 && ParametriBoiler.DebitMaxP1* ParametriBoiler.P1 > ParametriBoiler.DebitMaxP2 * ParametriBoiler.P2)))
                                 {
+
                                     y[1] = Convert.ToDecimal(0.1) * (ParametriBoiler.DebitMaxP1 * ParametriBoiler.P1 / 100 - ParametriBoiler.DebitMaxP2 * ParametriBoiler.P2 / 100) + y[0];
                                     y[0] = y[1];
                                 }
                                 else
                                 {
-                                    ParametriBoiler.PompaG1 = false;
+                                    //ParametriBoiler.PompaG1 = false;
                                     ParametriBoiler.ValvaK1 = false;
+                                    if (y[1] < ParametriBoiler.PragB1)
+                                        y[1] = ParametriBoiler.PragB1;
                                 }
                             }
                         }
+                        if (y[1] > ParametriBoiler.Capacitate)
+                            y[1] = ParametriBoiler.Capacitate;
                         ParametriBoiler.NivelCurent = y[1];
                         miliseconds += 100;
                         if (miliseconds == 1000)
@@ -98,7 +103,7 @@ namespace PS2IMVC
 
         private async void Initialise_Server()
         {
-            TcpListener server = new TcpListener(new IPAddress(new byte[] { 0, 0, 0, 0 }), 800);
+            TcpListener server = new TcpListener(new IPAddress(new byte[] { 0, 0, 0, 0 }), 8080);
             server.Start();
             while(true)
             {
@@ -110,9 +115,40 @@ namespace PS2IMVC
 
         private async void RunWorker(TcpClient client)
         {
-            byte[] length = new byte[1];
-            await client.GetStream().ReadAsync(length, 0, 1);
-            Debug.WriteLine(length[0].ToString());
+            string s = "";
+            byte[] message = new byte[1];
+            await client.GetStream().ReadAsync(message, 0, 1);
+            byte i = 0;
+            while(message[0] != 0)
+            {
+                if(message[0] == 47)
+                {
+                    switch (i)
+                    {
+                        case 0: ParametriBoiler.Capacitate = Convert.ToDecimal(s);
+                                break;
+                        case 1: ParametriBoiler.DebitMaxP1 = Convert.ToDecimal(s);
+                                break;
+                        case 2: ParametriBoiler.DebitMaxP2 = Convert.ToDecimal(s);
+                                break;
+                        case 3: ParametriBoiler.PragB1 = Convert.ToDecimal(s);
+                                break;
+                        case 4: ParametriBoiler.PragB2 = Convert.ToDecimal(s);
+                                break;
+                        case 5: ParametriBoiler.PragB3 = Convert.ToDecimal(s);
+                                break;
+                        case 6: ParametriBoiler.PragB4 = Convert.ToDecimal(s);
+                                break;
+
+                    }
+                    i++;
+                    s = "";
+                }
+                else
+                    s += (char)message[0];
+                await client.GetStream().ReadAsync(message, 0, 1);
+            }
+            await client.GetStream().WriteAsync(new byte[] { 1 }, 0, 1);
             client.Dispose();
         }
     }
