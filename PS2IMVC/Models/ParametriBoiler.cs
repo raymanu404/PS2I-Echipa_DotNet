@@ -27,5 +27,7 @@ namespace PS2IMVC.Models
         public static decimal PragB2 { get; set; }
         public static decimal PragB3 { get; set; }
         public static decimal PragB4 { get; set; }
+        public static decimal PragB5 { get; set; }
+
     }
 }

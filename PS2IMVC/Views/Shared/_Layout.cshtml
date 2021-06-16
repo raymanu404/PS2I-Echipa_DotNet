@@ -15,9 +15,6 @@
         p {
             font-size: 1.75vw;
         }
-        td{
-            border: 1px solid black;
-        }
     </style>
 </head>
 <body style="width: 100%; height: 100%; padding: 0; margin: 0;" onload="Refresh()">
@@ -171,23 +168,27 @@
                             <td data-i="@i" data-j="@j"></td>
                         }
                     }
-                    else if (i >= 21 && i <= 72 && j == 7)
+                    else if (i >= 4 && i <= 76 && j == 7)
                     {
                         if (76 - i == ViewBag.PragB1)
                         {
-                            <td class="PragB1" data-prag="@ViewBag.PragB1" style="position: relative; background-color: red;"><img src="~/Static/SensorB1.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
+                            <td class="PragB1" data-prag="@ViewBag.PragB1" style="position: relative;"><img src="~/Static/SensorB1.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
                         }
                         else if (76 - i == ViewBag.PragB2)
                         {
-                            <td class="PragB2" data-prag="@ViewBag.PragB2" style="position: relative; background-color: red;"><img src="~/Static/SensorB2.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
+                            <td class="PragB2" data-prag="@ViewBag.PragB2" style="position: relative;"><img src="~/Static/SensorB2.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
                         }
                         else if (76 - i == ViewBag.PragB3)
                         {
-                            <td class="PragB3" data-prag="@ViewBag.PragB3" style="position: relative; background-color: red;"><img src="~/Static/SensorB3.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
+                            <td class="PragB3" data-prag="@ViewBag.PragB3" style="position: relative;"><img src="~/Static/SensorB3.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
                         }
                         else if (76 - i == ViewBag.PragB4)
                         {
-                            <td class="PragB4" data-prag="@ViewBag.PragB4" style="position: relative; background-color: red;"><img src="~/Static/SensorB4.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
+                            <td class="PragB4" data-prag="@ViewBag.PragB4" style="position: relative;"><img src="~/Static/SensorB4.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
+                        }
+                        else if (76 - i == ViewBag.PragB5)
+                        {
+                            <td class="PragB5" data-prag="@ViewBag.PragB5" style="position: relative;"><img src="~/Static/SensorB5.png" style="width: auto; height: 1000%; position: absolute; top: -450%;" /></td>
                         }
                         else
                         {
@@ -252,7 +253,6 @@
                 data: { 'Refresh': "" },
                 url: '/',
                 success(data) {
-                    //console.log(data, data["Message"]);
                     var i, j;
                     console.log(data);
                     if (data["StateS0"] == true)
@@ -263,14 +263,16 @@
                         $('#S5_Button').css('background-color', 'red');
                     else
                         $('#S5_Button').css('background-color', 'black');
-                    for (i = 1; i <= 4; i++)
+                    for (i = 1; i <= 5; i++)
                         if ($('.PragB' + i).data('prag') != data["PragB" + i]) {
-                            $('.PragB' + i).removeClass('.PragB' + i).html('');
-                            $('tr').eq(76 - data["PragB" + i]).addClass("PragB" + i).data('prag', data["PragB" + i]).find('td').eq(7).html("<img src='~/Static/SensorB" + i + ".png' style='width: auto; height: 1000 %; position: absolute; top: -450 %;' />");
+                            $('.PragB' + i).removeClass('.PragB' + i).css('background-color', '').html('');
+                            $('tr').eq(76 - data["PragB" + i]).find('td').eq(7).css('position', 'relative').css('background-color', 'red').addClass("PragB" + i).data('prag', data["PragB" + i]).html("<img src='/Static/SensorB" + i + ".png' style='width: auto; height: 1000%; position: absolute; top: -450%;' />");
                         }
 
-                    for (i = 0; i < data["Nivel"]; i++) {
-                        var td = $('tr').eq(76 - i).find('td').eq(7);
+                    var level = data["Nivel"];
+
+                    if (level > 0) {
+                        var td = $('tr').eq(77 - level).find('td').eq(7);
                         if (td.hasClass('PragB1'))
                             $('#B1_Led').css('background-color', 'green');
                         else if (td.hasClass('PragB2'))
@@ -280,23 +282,22 @@
                         else if (td.hasClass('PragB4'))
                             $('#B4_Led').css('background-color', 'green');
                         for (j = 3; j <= 6; j++)
-                            $('tr').eq(76 - i).addClass("filled").find('td').eq(j).css('background-color', 'rgba(0, 0, 0, 0.5)');
-                    }
-                    var item_above = $('tr').eq(76 - i);
-                    var td = item_above.find('td').eq(7);
-                    if (item_above.hasClass("filled")) {
-                        item_above.removeClass("filled");
-                        for (j = 3; j <= 6; j++)
-                            item_above.find('td').eq(j).css('background-color', '');
-                        if (td.hasClass("PragB1"))
-                            $('#B1_Led').css('background-color', 'black');
-                        else if (td.hasClass('PragB2'))
-                            $('#B2_Led').css('background-color', 'black');
-                        else if (td.hasClass('PragB3'))
-                            $('#B3_Led').css('background-color', 'black');
-                        else if (td.hasClass('PragB4'))
-                            $('#B4_Led').css('background-color', 'black');
+                            $('tr').eq(77 - level).addClass("filled").find('td').eq(j).css('background-color', 'rgba(0, 0, 0, 0.5)');
 
+                        var item_above = $('tr').eq(77 - level - 1);
+                        var td = item_above.find('td').eq(7);
+                        if (!td.hasClass("PragB1") && item_above.hasClass("filled")) {
+                            item_above.removeClass("filled");
+                            for (j = 3; j <= 6; j++)
+                                item_above.find('td').eq(j).css('background-color', '');
+                            if (td.hasClass('PragB2'))
+                                $('#B2_Led').css('background-color', 'black');
+                            else if (td.hasClass('PragB3'))
+                                $('#B3_Led').css('background-color', 'black');
+                            else if (td.hasClass('PragB4'))
+                                $('#B4_Led').css('background-color', 'black');
+
+                        }
                     }
 
                 }
@@ -304,14 +305,6 @@
             });
             setTimeout(Refresh, 1000);
         }
-
-        //var i = 79;
-        //function Refresh() {
-        //    $('td[data-i=' + i + '][data-j=' + 6 + '], td[data-i=' + i + '][data-j=' + 5 + '], td[data-i=' + i + '][data-j=' + 4 + '], td[data-i=' + i + '][data-j=' + 3 + ']').css('background-color', 'rgba(0, 0, 0, 0.5)');
-        //    i--;
-        //    if(i >= 23)
-        //        setTimeout(Refresh, 100);
-        //}
 
         var P1 = false
         var P2 = false

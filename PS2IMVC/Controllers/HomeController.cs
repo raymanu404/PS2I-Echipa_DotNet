@@ -12,10 +12,11 @@ namespace PS2IMVC.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.PragB1 = Convert.ToInt32(ParametriBoiler.PragB1 * 54 / ParametriBoiler.Capacitate);
-            ViewBag.PragB2 = Convert.ToInt32(ParametriBoiler.PragB2 * 54 / ParametriBoiler.Capacitate);
-            ViewBag.PragB3 = Convert.ToInt32(ParametriBoiler.PragB3 * 54 / ParametriBoiler.Capacitate);
-            ViewBag.PragB4 = Convert.ToInt32(ParametriBoiler.PragB4 * 54 / ParametriBoiler.Capacitate);
+            ViewBag.PragB1 = Convert.ToInt32(ParametriBoiler.PragB1 * 72 / ParametriBoiler.Capacitate);
+            ViewBag.PragB2 = Convert.ToInt32(ParametriBoiler.PragB2 * 72 / ParametriBoiler.Capacitate);
+            ViewBag.PragB3 = Convert.ToInt32(ParametriBoiler.PragB3 * 72 / ParametriBoiler.Capacitate);
+            ViewBag.PragB4 = Convert.ToInt32(ParametriBoiler.PragB4 * 72 / ParametriBoiler.Capacitate);
+            ViewBag.PragB5 = Convert.ToInt32(ParametriBoiler.PragB5 * 72 / ParametriBoiler.Capacitate);
             return View();
         }
 
@@ -72,7 +73,7 @@ namespace PS2IMVC.Controllers
                     stateS0 = false;
                     stateS5 = false;
                 }
-                return Json(new { Nivel = Convert.ToByte(ParametriBoiler.NivelCurent*55/ParametriBoiler.Capacitate), PragB1 = Convert.ToInt32(ParametriBoiler.PragB1 * 54 / ParametriBoiler.Capacitate), PragB2 = Convert.ToInt32(ParametriBoiler.PragB2 * 54 / ParametriBoiler.Capacitate), PragB3 = Convert.ToInt32(ParametriBoiler.PragB3 * 54 / ParametriBoiler.Capacitate), PragB4 = Convert.ToInt32(ParametriBoiler.PragB4 * 54 / ParametriBoiler.Capacitate), StateS0 = stateS0, StateS5 = stateS5});
+                return Json(new { Nivel = Convert.ToByte(ParametriBoiler.NivelCurent* 72 / ParametriBoiler.Capacitate), PragB1 = Convert.ToInt32(ParametriBoiler.PragB1 * 72 / ParametriBoiler.Capacitate), PragB2 = Convert.ToInt32(ParametriBoiler.PragB2 * 72 / ParametriBoiler.Capacitate), PragB3 = Convert.ToInt32(ParametriBoiler.PragB3 * 72 / ParametriBoiler.Capacitate), PragB4 = Convert.ToInt32(ParametriBoiler.PragB4 * 72 / ParametriBoiler.Capacitate), PragB5 = Convert.ToInt32(ParametriBoiler.PragB5 * 72 / ParametriBoiler.Capacitate), StateS0 = stateS0, StateS5 = stateS5});
             }
             return Json( new { Message = "success", JsonRequestBehavior.AllowGet } );
         }

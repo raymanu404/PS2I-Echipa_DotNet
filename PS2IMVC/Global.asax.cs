@@ -29,7 +29,8 @@ namespace PS2IMVC
             ParametriBoiler.PragB1 = 1000;
             ParametriBoiler.PragB2 = 2000;
             ParametriBoiler.PragB3 = 3000;
-            ParametriBoiler.PragB4 = 10000;
+            ParametriBoiler.PragB4 = 7000;
+            ParametriBoiler.PragB5 = 8000;
 
 
             AreaRegistration.RegisterAllAreas();
@@ -39,10 +40,10 @@ namespace PS2IMVC
             Initialise_Server();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            timer_10ms(stopwatch);
+            timer_100ms(stopwatch);
         }
 
-        private void timer_10ms(Stopwatch stopwatch)
+        private void timer_100ms(Stopwatch stopwatch)
         {
             Task task = new Task(() => {
                 decimal[] y = new decimal[] { 0, 0 };
@@ -58,7 +59,7 @@ namespace PS2IMVC
                         {
                             if (ParametriBoiler.PompaG1 == true && ParametriBoiler.ValvaK1 == false)
                             {
-                                if (ParametriBoiler.NivelCurent < ParametriBoiler.Capacitate)
+                                if (ParametriBoiler.NivelCurent < ParametriBoiler.PragB5)
                                 {
                                     y[1] = Convert.ToDecimal(0.1) * ParametriBoiler.DebitMaxP1 * ParametriBoiler.P1 / 100 + y[0];
                                     y[0] = y[1];
@@ -70,7 +71,7 @@ namespace PS2IMVC
                             }
                             else if (ParametriBoiler.PompaG1 == true && ParametriBoiler.ValvaK1 == true)
                             {
-                                if (((ParametriBoiler.NivelCurent < ParametriBoiler.Capacitate) || (ParametriBoiler.NivelCurent >= ParametriBoiler.Capacitate && ParametriBoiler.DebitMaxP1 * ParametriBoiler.P1 < ParametriBoiler.DebitMaxP2 * ParametriBoiler.P2)) && ((ParametriBoiler.NivelCurent > ParametriBoiler.PragB1) || (ParametriBoiler.NivelCurent <= ParametriBoiler.PragB1 && ParametriBoiler.DebitMaxP1* ParametriBoiler.P1 > ParametriBoiler.DebitMaxP2 * ParametriBoiler.P2)))
+                                if (((ParametriBoiler.NivelCurent < ParametriBoiler.PragB5) || (ParametriBoiler.NivelCurent >= ParametriBoiler.PragB5 && ParametriBoiler.DebitMaxP1 * ParametriBoiler.P1 < ParametriBoiler.DebitMaxP2 * ParametriBoiler.P2)) && ((ParametriBoiler.NivelCurent > ParametriBoiler.PragB1) || (ParametriBoiler.NivelCurent <= ParametriBoiler.PragB1 && ParametriBoiler.DebitMaxP1* ParametriBoiler.P1 > ParametriBoiler.DebitMaxP2 * ParametriBoiler.P2)))
                                 {
 
                                     y[1] = Convert.ToDecimal(0.1) * (ParametriBoiler.DebitMaxP1 * ParametriBoiler.P1 / 100 - ParametriBoiler.DebitMaxP2 * ParametriBoiler.P2 / 100) + y[0];
@@ -85,13 +86,13 @@ namespace PS2IMVC
                                 }
                             }
                         }
-                        if (y[1] > ParametriBoiler.Capacitate)
-                            y[1] = ParametriBoiler.Capacitate;
+                        if (y[1] > ParametriBoiler.PragB5)
+                            y[1] = ParametriBoiler.PragB5;
                         ParametriBoiler.NivelCurent = y[1];
                         miliseconds += 100;
                         if (miliseconds == 1000)
                         {
-                            Debug.WriteLine(y[1]);
+                            //Debug.WriteLine(y[1]);
                             miliseconds = 0;
                         }
                     }
@@ -131,15 +132,16 @@ namespace PS2IMVC
                                 break;
                         case 2: ParametriBoiler.DebitMaxP2 = Convert.ToDecimal(s);
                                 break;
-                        case 3: ParametriBoiler.PragB1 = Convert.ToDecimal(s);
+                        case 3: ParametriBoiler.NivelCurent = Convert.ToDecimal(s);
                                 break;
-                        case 4: ParametriBoiler.PragB2 = Convert.ToDecimal(s);
+                        case 4: ParametriBoiler.PragB1 = Convert.ToDecimal(s);
                                 break;
-                        case 5: ParametriBoiler.PragB3 = Convert.ToDecimal(s);
+                        case 5: ParametriBoiler.PragB2 = Convert.ToDecimal(s);
                                 break;
-                        case 6: ParametriBoiler.PragB4 = Convert.ToDecimal(s);
+                        case 6: ParametriBoiler.PragB3 = Convert.ToDecimal(s);
                                 break;
-
+                        case 7: ParametriBoiler.PragB4 = Convert.ToDecimal(s);
+                                break;
                     }
                     i++;
                     s = "";
@@ -148,6 +150,7 @@ namespace PS2IMVC
                     s += (char)message[0];
                 await client.GetStream().ReadAsync(message, 0, 1);
             }
+            ParametriBoiler.PragB5 = Convert.ToDecimal(s);
             await client.GetStream().WriteAsync(new byte[] { 1 }, 0, 1);
             client.Dispose();
         }
